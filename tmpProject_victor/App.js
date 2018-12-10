@@ -1,34 +1,47 @@
 import React from 'react';
 import { AppRegistry, StyleSheet, Button, Image, Text, View} from 'react-native';
 import {createStackNavigator, createAppContainer, NavigationActions, StackAction, navigationOptions} from 'react-navigation';
-
-import AcceuilPage from './AcceuilPage.js'
-/*
-export default class App extends React.Component {
-  render() {
-    return (
-        <Navigation/>
-      );
-  }
-}*/
+import HomePage from './HomePage.js';
+import ModulePage from './ModulePage.js';
 
 class LoadingScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      timePassed: false
+    };
+  }
+
+  componentDidMount() {
+    setTimeout( () => {
+      this.setTimePassed();
+    },3000);
+  }
+
+  setTimePassed() {
+    this.setState({timePassed: true});
+  }
+
   render() {
+    if (this.state.timePassed) {
+      return this.props.navigation.reset([NavigationActions.navigate({routeName: 'Home'})], 0);
+    } else {
       let pic = {
-      uri: './gecko.png'
+        uri: './gecko.png'
+      }
+      return (
+        <View style={styles.container}>
+          <Image source={require('./gecko.png')}/>
+          <Text style={[styles.titleText, {color: 'white'}]}>ChronoSymple </Text>
+        </View>
+      );
     }
-    return (
-      <View style={styles.container}>
-        <Image source={require('./gecko.png')}/>
-        <Text style={[styles.titleText, {color: 'white'}]}>ChronoSymple </Text>
-      </View>
-    );
   }
 }
 
 const Navigation = createStackNavigator({
   Loading: {
-    screen: LoadingScreen
+    screen: LoadingScreen,
     navigationOptions: {
       header: null
     },
@@ -38,6 +51,28 @@ const Navigation = createStackNavigator({
     navigationOptions: {
       header: null
     },
+  },
+  Module: {
+    screen: ModulePage,
+    navigationOptions: {
+      header: null
+    },
+  },
+});
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#62BE87',
+    fontSize: 40,
+    fontWeight: 'bold',
+  },
+  titleText: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    lineHeight: 200,
   },
 });
 
