@@ -1,7 +1,7 @@
 // Components/SignIn.js
 
 import React from 'react'
-import { View, Text, Button, TextInput} from 'react-native'
+import { View, Text, Button, TextInput, Dimensions } from 'react-native'
 
 class SignIn extends React.Component {
 	//constructeur de la classe je définis mail et paswword les deux éléms pour la connexions
@@ -35,30 +35,37 @@ class SignIn extends React.Component {
 
   render() {
 	let { navigate } = this.props.navigation;
+	let deviceWidth = Dimensions.get('window').width
     return (
-      <View style={{ flex: 1}}>
-	<Text style={{ flex: 1}} >JE SUIS SIGN IN</Text>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+	{/*<Text style={{ }} >JE SUIS SIGN IN</Text>*/}
+	<Text style={{fontSize: 24}}>Login{"\n"}</Text>
 	<TextInput
-		placeholder="email"
-		style={{ flex: 1, height: 40, borderColor: 'gray', borderWidth: 1}}
+		placeholder="Addresse mail"
+		style={{ height: 40, width: deviceWidth / 3 * 2, borderBottomWidth: 1}}
 		onChangeText={(text) => this.setMail(text)}
 		value={this.mail}
 	/>
+	<Text>{"\n"}</Text>
 	<TextInput
-		placeholder="password"
-		style={{ flex: 1, height: 40, backgroundColor: 'gray', borderWidth: 1}}
+		placeholder="Mot de passe"
+		style={{ height: 40, width: deviceWidth / 3 * 2, borderBottomWidth: 1}}
 		onChangeText={(text) => this.setPassword(text)}
 		value={this.mail}
 	/>
+	<Text>{"\n"}</Text>
 	<Button 
-		style={{ flex: 1 }} 
+		style={{ height: 40, borderWidth: 2, borderColor: '#000000' }} 
 		onPress={() => this.checkLogin()} 
-		title="SI T'APPUIS SUR CE BOUTON TU PASSES AU COMPONENT HOME dans 'Home.js' CA SERA LE BOUTON DE LOGIN"
+		title="Connection"
+		/*title="SI T'APPUIS SUR CE BOUTON TU PASSES AU COMPONENT HOME dans 'Home.js' CA SERA LE BOUTON DE LOGIN"*/
 	/>
+	<Text>{"\n"}</Text>
 	<Button 
-		style={{ flex: 1 }} 
+		style={{ height: 40, borderWidth: 2, borderColor: '#000000' }} 
 		onPress={() => navigate('SignUp')} 
-		title="Je ne suis pas encore inscrit => ALLEZ SUR SINGUP"
+		title="je n'ai pas de compte"
+		/*title="Je ne suis pas encore inscrit => ALLEZ SUR SINGUP"*/
 	/>
       </View>
     )
