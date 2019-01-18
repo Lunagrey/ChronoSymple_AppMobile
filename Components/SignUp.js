@@ -7,15 +7,15 @@ class SignUp extends React.Component {
 
         constructor(props) {
                 super(props)
-                this.state = { mail: "", password: "", rePassword: "" , isValid: false}
+                this.state = { mail: "", password: "", rePassword: "" , isInvalid: false}
         }
         
         //checklogin est la focntion appelé sur le onpress du bouton bleu
         SingUp = () => {
                 let { navigate } = this.props.navigation;
                 //si l'un des deux est vide pas de passage à home
-                if (this.state.mail == "" || this.state.password == "" || this.state.rePassword == "") {
-                    this.setState({ isValid: true })
+                if (this.state.mail == "" || this.state.password == "" || this.state.rePassword == "" || this.state.password != this.state.rePassword) {
+                    this.setState({ isInvalid: true })
                     return;
                 }
 
@@ -45,7 +45,7 @@ class SignUp extends React.Component {
     let deviceWidth = Dimensions.get('window').width
     let errorText = "mauvais mot de passe ou addresse mail"
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: '#62BE87'}}>
         <Text style={{fontSize: 24}}>Inscription{"\n"}</Text>
         <TextInput
                 placeholder="Addresse mail"
@@ -82,7 +82,7 @@ class SignUp extends React.Component {
                 /*title="Je ne déjà inscrit => ALLEZ SUR SIGNIN"*/
         />
         <Text>{"\n"}</Text>
-        { this.state.isValid && <Text style={{color: 'red'}}>{errorText}</Text> }
+        { this.state.isInvalid && <Text style={{color: 'red'}}>{errorText}</Text>}
       </View>
     )
   }

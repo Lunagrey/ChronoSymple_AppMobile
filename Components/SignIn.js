@@ -7,7 +7,7 @@ class SignIn extends React.Component {
 	//constructeur de la classe je définis mail et paswword les deux éléms pour la connexions
 	constructor(props) {
 		super(props)
-		this.state = { mail: "", password: "" }
+		this.state = { mail: "", password: "", isInvalid: false }
 	}
 	
 	//checklogin est la focntion appelé sur le onpress du bouton bleu
@@ -15,6 +15,7 @@ class SignIn extends React.Component {
 		let { navigate } = this.props.navigation;
 		//si l'un des deux est vide pas de passage à home
 		if (this.state.mail == "" || this.state.password == "")
+			this.setState({ isInvalid: true })
 			return;
 		// LA TU FAIS TON BORDEL EN BASE DE DONNEE
 		let cafontionne = true;
@@ -36,6 +37,7 @@ class SignIn extends React.Component {
   render() {
 	let { navigate } = this.props.navigation;
 	let deviceWidth = Dimensions.get('window').width
+	let errorMessage = "Mauvais addresse mail ou mot de passe"
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
 	{/*<Text style={{ }} >JE SUIS SIGN IN</Text>*/}
@@ -67,7 +69,10 @@ class SignIn extends React.Component {
 		title="je n'ai pas de compte"
 		/*title="Je ne suis pas encore inscrit => ALLEZ SUR SINGUP"*/
 	/>
+	<Text>{"\n"}</Text>
+	{this.state.isInvalid && <Text style={{ color: 'red' }}>{errorMessage}</Text>}
       </View>
+	
     )
   }
 }
