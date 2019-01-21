@@ -9,14 +9,15 @@ class SignIn extends React.Component {
 		super(props)
 		this.state = { mail: "", password: "", isInvalid: false }
 	}
-	
+
 	//checklogin est la focntion appelé sur le onpress du bouton bleu
 	checkLogin = () => {
 		let { navigate } = this.props.navigation;
 		//si l'un des deux est vide pas de passage à home
-		if (this.state.mail == "" || this.state.password == "")
+		if (this.state.mail == "" || this.state.password == "") {
 			this.setState({ isInvalid: true })
 			return;
+		}
 		// LA TU FAIS TON BORDEL EN BASE DE DONNEE
 		let cafontionne = true;
 		if (cafontionne)
@@ -56,23 +57,23 @@ class SignIn extends React.Component {
 		value={this.mail}
 	/>
 	<Text>{"\n"}</Text>
-	<Button 
-		style={{ height: 40, borderWidth: 2, borderColor: '#000000' }} 
-		onPress={() => this.checkLogin()} 
+	<Button
+		style={{ height: 40, borderWidth: 2, borderColor: '#000000' }}
+		onPress={() => this.checkLogin()}
 		title="Connection"
 		/*title="SI T'APPUIS SUR CE BOUTON TU PASSES AU COMPONENT HOME dans 'Home.js' CA SERA LE BOUTON DE LOGIN"*/
 	/>
 	<Text>{"\n"}</Text>
-	<Button 
-		style={{ height: 40, borderWidth: 2, borderColor: '#000000' }} 
-		onPress={() => navigate('SignUp')} 
+	<Button
+		style={{ height: 40, borderWidth: 2, borderColor: '#000000' }}
+		onPress={() => navigate('SignUp')}
 		title="je n'ai pas de compte"
 		/*title="Je ne suis pas encore inscrit => ALLEZ SUR SINGUP"*/
 	/>
 	<Text>{"\n"}</Text>
 	{this.state.isInvalid && <Text style={{ color: 'red' }}>{errorMessage}</Text>}
       </View>
-	
+
     )
   }
 }
