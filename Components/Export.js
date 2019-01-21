@@ -1,16 +1,23 @@
-// Components/Export.js
 
 import React from 'react'
-import { View, Text} from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 
-class Export extends React.Component {
+export default class Export extends React.Component {
+
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ flex: 1 }} >JE SUIS EXPORT</Text>
+      <View style={styles.container}>
+        <Text>Screen 1</Text>
       </View>
     )
   }
 }
 
-export default Export;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})

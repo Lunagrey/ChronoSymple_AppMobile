@@ -1,22 +1,58 @@
 // Components/ModulePlace.js
 
 import React from 'react'
-import { View, Text, Button} from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity, Image} from 'react-native'
+import { Icon } from 'react-native-elements'
+import { TouchableRipple } from 'react-native-paper';
 
 class ModulePlace extends React.Component {
+  _searchModule = () => {
+    console.log('faire le filtre ici')
+  }
+
   render() {
 	let { navigate } = this.props.navigation;
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ flex: 1 }} >JE SUIS LE MODULPLACE</Text>
-        <Button 
-		style={{ flex: 1 }} 
-		onPress={() => navigate('AddModule')} 
-		title="OHLALAL J4ADD LE MODULE DIABETE"
-	/>
+      <View style={styles.main_container}>
+        <View style={styles.search}>
+          <Icon name='search' style={styles.searchelem}/> 
+          <TextInput
+            style={styles.searchelem}
+            placeholder='Titre du film'
+            onSubmitEditing={() => this._searchModule()}/>
+        </View>
+        <View style={styles.module}>
+          <TouchableOpacity
+            onPress={() => navigate('HomeModule')}
+		        title="OHLALA J'ADD LE MODULE DIABETE"
+	        >
+          <Image source={require("../Images/diamodule.png")}/>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  main_container: {
+    flex: 1,
+  },
+  search: { 
+    flex: 1,
+    flexDirection: 'row',
+    height: 50,
+    borderColor: '#000000',
+    borderWidth: 0.5,
+    paddingLeft: 5
+  },
+  module: { 
+    flex: 9,
+    height: 50,
+  },
+  searchelem: {
+    flex: 1,
+  },
+})
 
 export default ModulePlace;
