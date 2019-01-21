@@ -45,7 +45,7 @@ class SignUp extends React.Component {
     let deviceWidth = Dimensions.get('window').width
     let errorText = "mauvais mot de passe ou addresse mail"
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: '#62BE87'}}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'white'}}>
         <Text style={{fontSize: 24}}>Inscription{"\n"}</Text>
         <TextInput
                 placeholder="Addresse mail"
@@ -69,14 +69,14 @@ class SignUp extends React.Component {
         />
         <Text>{"\n"}</Text>
         <Button 
-                style={{ }} 
+		color="#62BE87"
                 onPress={() => this.SingUp()} 
                 title="S'inscrire"
                 /*title="SI T'APPUIS SUR CE BOUTON CA DOIT SIGNUP LE GARS ET APRES CA REDIRECT LOGIN"*/
         />
         <Text>{"\n"}</Text>
         <Button 
-                style={{ backgroundColor: 'red' }} 
+		color="#62BE87"
                 onPress={() => navigate('SignIn')} 
                 title="J'ai deja un compte"
                 /*title="Je ne déjà inscrit => ALLEZ SUR SIGNIN"*/
