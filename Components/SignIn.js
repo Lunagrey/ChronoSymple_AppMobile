@@ -14,7 +14,7 @@ class SignIn extends React.Component {
 		super(props)
 		this.state = { mail: "", password: "", isInvalid: false }
 	}
-	
+
 	//checklogin est la focntion appelé sur le onpress du bouton bleu
 	checkLogin = () => {
 		let { navigate } = this.props.navigation;
@@ -80,7 +80,6 @@ class SignIn extends React.Component {
 	<Text>{"\n"}</Text>
 	{this.state.isInvalid && <Text style={{ color: 'red' }}>{errorMessage}</Text>}
       </View>
-	
     )
   }
 }
