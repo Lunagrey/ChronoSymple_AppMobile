@@ -1,1 +1,8 @@
+<<<<<<< HEAD
+node_modules/*
+.expo/
+*.vgcore
+*.vscode
+=======
 node_modules
+>>>>>>> ebc49e4a5aad8e5214012dab84fabfceb2323351
