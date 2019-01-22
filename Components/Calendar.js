@@ -1,22 +1,40 @@
 // Components/Calendar.js
 
 import React from 'react'
-import { View, Text, Button} from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
+import { TouchableRipple } from 'react-native-paper';
 
 class Calendar extends React.Component {
-  render() {
+	render() {
 		let { navigate } = this.props.navigation;
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ flex: 1 }} >JE SUIS CALENDRIER</Text>
-        <Button 
-          color="#62BE87"
-		      onPress={() => navigate('test')} 
-		      title="ALLEZ SUR LE MODULE PLACE"
-	      />
-      </View>
-    )
-  }
+		return (
+			<View style={styles.main_container}>
+					<View
+					style={styles.module}
+					onPress={() => navigate('CalendarStackNavigator')}>
+						<Text>22 JANVIER 2019</Text>
+					</View>
+			</View>
+		)
+	}
 }
+
+const styles = StyleSheet.create({
+	main_container: {
+		marginTop: 10
+	},
+  module: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderWidth: 3,
+		borderColor: '#62BE87',
+		borderRadius: 0.5,
+		padding: 30
+	},
+	date: {
+
+	}
+})
 
 export default Calendar;

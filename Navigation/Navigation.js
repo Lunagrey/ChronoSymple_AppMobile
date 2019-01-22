@@ -5,11 +5,12 @@ import {TouchableOpacity, StyleSheet, Image} from 'react-native';
 
 import Home from '../Components/Home';
 import DrawerScreen from './DrawerScreen';
+import Login from '../Components/Login';
 import SignIn from '../Components/SignIn';
-import SignUp from '../Components/SignUp';
 import ModulePlace from '../Components/ModulePlace';
 import HomeModule from '../Components/HomeModule';
 import Calendar from '../Components/Calendar';
+import CalendarNote from '../Components/CalendarNote';
 import Statistic from '../Components/Statistic';
 import Export from '../Components/Export';
 import Note from '../Components/Note';
@@ -30,15 +31,12 @@ const NoteStackNavigator = createStackNavigator({
 })
 
 const CalendarStackNavigator = createStackNavigator({
-	Calendar: {
-	  screen: Calendar,
-	},
 	test: {
-		screen: Export
+		screen: CalendarNote
 	}
-},{
+}, {
 	headerMode: 'none'
-} )
+})
 
 const StatisticStackNavigator = createStackNavigator({
 	Statistic: {
@@ -55,7 +53,7 @@ const ExportStackNavigator = createStackNavigator({
 const Tabs = createBottomTabNavigator({
 	Home: HomeModule,
 	Note: Note,
-	Calendar: CalendarStackNavigator,
+	Calendar: Calendar,
 	Statistic: Statistic,
 	Export: Export
 },{
@@ -69,7 +67,6 @@ const MenuImage = ({navigation}) => {
 	}else{
 		return <Icon color="white" name="arrow-back" size={30} />
 	}
-
 }
 
 const DrawerNavigator = createDrawerNavigator({
@@ -79,52 +76,53 @@ const DrawerNavigator = createDrawerNavigator({
 		HomeModule: {
 			screen: Tabs
 		},
-	},{
-		contentComponent: DrawerScreen,
-		headerMode: 'none',
-		drawerWidth: 300,
-		navigationOptions: ({ navigation }) => ({
-				title : 'Home',
-				  // Title to appear in status bar
-				headerLeft: 
-				<TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
-					<MenuImage navigation={navigation}/>
-				</TouchableOpacity>,
-				headerStyle: {
-					backgroundColor: '#58b57d',
-				},
-				headerTintColor: '#fff',
-				headerTitleStyle: {
-				  fontWeight: 'bold',
-				},
-		
-			})
-	});
-
-	const StackNavigtorWhithoutModule = createStackNavigator({
-		Drawer: {
-			screen: DrawerNavigator
+},{
+	contentComponent: DrawerScreen,
+	drawerWidth: 300,
+	navigationOptions: ({ navigation }) => ({
+		title : 'Home',
+		  // Title to appear in status bar
+		headerLeft: 
+		<TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
+			<MenuImage navigation={navigation}/>
+		</TouchableOpacity>,
+		headerStyle: {
 		},
-		Stack: {
-			screen: ModulePlace, navigationOptions: { title:'ModulPlace' }
-		}
+			backgroundColor: '#58b57d',
+		headerTintColor: '#fff',
+		headerTitleStyle: {
+		  fontWeight: 'bold',
+		},
+	
 	})
+});
+const StackNavigtorWhithoutModule = createStackNavigator({
+	Drawer: {
+		screen: DrawerNavigator
+	},
+	Stack: {
+		screen: ModulePlace, navigationOptions: { title:'ModulPlace' }
+	},
+	CalendarStackNavigator: {
+		screen : CalendarStackNavigator
+	}
+})
 
-	const LoginStack = createStackNavigator({
-		SignIn: { screen: SignIn },
-		SignUp: { screen: SignUp }
-	})
+const LoginStack = createStackNavigator({
+	Login: { screen: Login },
+	SignIn: { screen: SignIn }
+})
 
-	const StackNavigator = createStackNavigator({
-		LoginStack: {
-			screen: LoginStack, headerMode : 'none'
-		},
-		Drawer: {
-			screen: StackNavigtorWhithoutModule
-		},
-	},{
-		initialRouteName : 'LoginStack',
-		headerMode: 'none'
-	});
-	  
+const StackNavigator = createStackNavigator({
+	LoginStack: {
+		screen: LoginStack, headerMode : 'none'
+	},
+	Drawer: {
+		screen: StackNavigtorWhithoutModule
+	},
+},{
+	initialRouteName : 'LoginStack',
+	headerMode: 'none'
+});
+  
 export default createAppContainer(StackNavigator);
