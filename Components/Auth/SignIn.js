@@ -59,6 +59,10 @@ class SignIn extends React.Component {
 	    this.setState({ rePassword: text})
 	}
 
+	set = (object, value) => {
+		this.setState({ object : value });
+	}
+
   render() {
     let { navigate } = this.props.navigation;
     let deviceWidth = Dimensions.get('window').width
@@ -70,7 +74,7 @@ class SignIn extends React.Component {
 	 <TextInput
 		placeholder="Prénom"
 		style={{ height: 40, width: deviceWidth / 3 * 2, borderBottomWidth: 1}}
-		onChangeText={(text) => this.setFName(text)}
+		onChangeText={(text) => this.set('fname', text)}
 		value={this.mail}
 	/>
 	<Text>{"\n"}</Text>

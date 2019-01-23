@@ -112,8 +112,8 @@ const DrawerNavigator = createDrawerNavigator({
 	})
 
 	const LoginStack = createStackNavigator({
-		SignIn: { screen: Login },
-		SignUp: { screen: SignIn }
+		Login: { screen: Login },
+		SignIn: { screen: SignIn }
 	})
 
 	const StackNavigator = createStackNavigator({
