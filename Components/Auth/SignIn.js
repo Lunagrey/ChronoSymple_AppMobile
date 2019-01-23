@@ -2,13 +2,13 @@
 
 import React from 'react'
 import { View, Text, TextInput, Button, Dimensions} from 'react-native'
-import { SiginAPatientWithApi } from '../API/APIConnection'
+import { SiginAPatientWithApi } from '../../API/APIConnection'
 
 class SignIn extends React.Component {
 	static navigationOptions = {
 		headerStyle: {backgroundColor: '#58b57d'},
-	  title: 'Inscription',
-	  headerTintColor: 'white'
+		title: 'Inscription',
+	  	headerTintColor: 'white'
 	}
 	constructor(props) {
 		super(props)

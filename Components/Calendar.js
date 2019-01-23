@@ -9,11 +9,11 @@ class Calendar extends React.Component {
 		let { navigate } = this.props.navigation;
 		return (
 			<View style={styles.main_container}>
-					<View
+					<TouchableOpacity
 					style={styles.module}
 					onPress={() => navigate('CalendarStackNavigator')}>
 						<Text>22 JANVIER 2019</Text>
-					</View>
+					</TouchableOpacity>
 			</View>
 		)
 	}
@@ -21,7 +21,7 @@ class Calendar extends React.Component {
 
 const styles = StyleSheet.create({
 	main_container: {
-		marginTop: 10
+		margin: 10
 	},
   module: {
 		flex: 1,
