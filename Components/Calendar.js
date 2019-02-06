@@ -1,7 +1,7 @@
 // Components/Calendar.js
 
 import React from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, AsyncStorage} from 'react-native'
 import { TouchableRipple } from 'react-native-paper';
 
 class Calendar extends React.Component {
@@ -9,11 +9,11 @@ class Calendar extends React.Component {
 		let { navigate } = this.props.navigation;
 		return (
 			<View style={styles.main_container}>
-					<TouchableOpacity
-					style={styles.module}
-					onPress={() => navigate('CalendarStackNavigator')}>
-						<Text>22 JANVIER 2019</Text>
-					</TouchableOpacity>
+				<TouchableOpacity
+				style={styles.module}
+				onPress={() => navigate('CalendarStackNavigator')}>
+					<Text>22 JANVIER 2019</Text>
+				</TouchableOpacity>
 			</View>
 		)
 	}

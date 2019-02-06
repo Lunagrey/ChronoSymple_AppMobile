@@ -22,7 +22,7 @@ class ModulePlace extends React.Component {
 
 const styles = StyleSheet.create({
 	main_container: {
-		flex: 1,
+		flex: 1
 	},
 	search: { 
 		flex: 1,
@@ -34,11 +34,11 @@ const styles = StyleSheet.create({
 	},
 	module: { 
 		flex: 9,
-		height: 50,
+		height: 50
 	},
 	searchelem: {
-		flex: 1,
-	},
+		flex: 1
+	}
 })
 
 export default ModulePlace;

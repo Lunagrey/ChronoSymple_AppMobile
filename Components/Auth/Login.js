@@ -3,7 +3,7 @@
 import React from 'react'
 import { View, Text, Button, TextInput, Dimensions, AsyncStorage } from 'react-native'
 import { LoginAPatientWithApi } from '../../API/APIConnection'
-import { InAsyncStorage } from './VerifyToken'
+import { getToken, setToken } from './StoreToken'
 
 class Login extends React.Component {
 	static navigationOptions = {
@@ -14,16 +14,8 @@ class Login extends React.Component {
 
 	constructor(props) {
 		super(props)
+		AsyncStorage.clear()
 		this.state = { mail: "", password: "", isInvalid: false }
-	}
-
-	storeData = async (token) => {
-		try {
-			console.log('enter data ' + token)
-			await AsyncStorage.setItem('token', token);
-		} catch (error) {
-			console.error('AsyncStorage#setItem error: ' + error.message);
-		}
 	}
 
 	checkLogin = () => {
@@ -33,15 +25,17 @@ class Login extends React.Component {
 			this.setState({ isInvalid: true })
 			return;
 		}
-
+		console.log("oui")
 		LoginAPatientWithApi(this.state.mail, this.state.password).then(data => {
+			console.log('ok')
+			console.log(data)
 			let token = data.login_token
-
-			if (token) {
-				this.storeData(token);
+			console.log(token)
+			if (token !== null) {
+				setToken(token);
+				console.log('juste after add it', getToken())
 				navigate('Home')
 			}
-
 			else {
 				var tabErrors = data.errors
 				this.setState({ isInvalid: true, errorText: "Problème de connection" })
@@ -59,12 +53,12 @@ class Login extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('oui');
 		let { navigate } = this.props.navigation;
-		value = InAsyncStorage();
-		if (value !== null) {
-			navigate('Home')
-		}
+		value = getToken();
+		console.log(value)
+		//if (value !== null) {
+		//	navigate('Home')
+		//}
 	}
 
   	render() {
@@ -93,7 +87,6 @@ class Login extends React.Component {
 				style={{ height: 40, borderWidth: 2, borderColor: '#000000' }} 
 				onPress={() => this.checkLogin()} 
 				title="Se connecter"
-				/*title="SI T'APPUIS SUR CE BOUTON TU PASSES AU COMPONENT HOME dans 'Home.js' CA SERA LE BOUTON DE LOGIN"*/
 			/>
 			<Text>{"\n"}</Text>
 			<Button 
@@ -101,12 +94,12 @@ class Login extends React.Component {
 				style={{ height: 40, borderWidth: 2, borderColor: '#000000' }} 
 				onPress={() => navigate('SignIn')} 
 				title="je n'ai pas de compte"
-				/*title="Je ne suis pas encore inscrit => ALLEZ SUR SINGUP"*/
 			/>
 			<Text>{"\n"}</Text>
 			{this.state.isInvalid && <Text style={{ color: 'red' }}>{errorMessage}</Text>}
 		</View>
-	)}
+		)
+	}
 }
 
 export default Login;

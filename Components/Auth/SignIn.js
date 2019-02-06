@@ -21,10 +21,11 @@ class SignIn extends React.Component {
 		//si l'un des deux est vide pas de passage à home
 		if (this.state.fname == "" || this.state.lname == "" || this.state.mail == "" || this.state.password == "" ||
 			this.state.rePassword == "" || this.state.password != this.state.rePassword) {
-		    this.setState({ isInvalid: true })
+		    this.setState({ isInvalid: true, errorText: "Problème entrée de donnée"  })
 		    return;
 		}
 
+		console.log('come here')
 		SiginAPatientWithApi(this.state.fname, this.state.lname, this.state.mail, this.state.password).then(data => {
 		console.log(data)
 		let token = data.login_token
@@ -74,15 +75,15 @@ class SignIn extends React.Component {
 	 <TextInput
 		placeholder="Prénom"
 		style={{ height: 40, width: deviceWidth / 3 * 2, borderBottomWidth: 1}}
-		onChangeText={(text) => this.set('fname', text)}
-		value={this.mail}
+		onChangeText={(text) => this.setFName(text)}
+		value={this.fname}
 	/>
 	<Text>{"\n"}</Text>
 	<TextInput
 		placeholder="Nom"
 		style={{ height: 40, width: deviceWidth / 3 * 2, borderBottomWidth: 1}}
 		onChangeText={(text) => this.setLName(text)}
-		value={this.mail}
+		value={this.lname}
 	/>
 	<Text>{"\n"}</Text>
 	<TextInput

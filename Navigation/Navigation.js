@@ -5,6 +5,7 @@ import {TouchableOpacity, StyleSheet, Image} from 'react-native';
 
 import Login from '../Components/Auth/Login';
 import SignIn from '../Components/Auth/SignIn';
+import Logout from '../Components/Auth/Logout';
 import Home from '../Components/Home';
 import DrawerScreen from './DrawerScreen';
 import ModulePlace from '../Components/ModulePlace';
@@ -55,7 +56,8 @@ const Tabs = createBottomTabNavigator({
 	Note: Note,
 	Calendar: Calendar,
 	Statistic: Statistic,
-	Export: Export
+	Export: Export,
+	Logout: Logout
 },{
 	headerMode: 'none'
 });
