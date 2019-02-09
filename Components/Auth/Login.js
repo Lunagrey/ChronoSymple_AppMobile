@@ -25,15 +25,10 @@ class Login extends React.Component {
 			this.setState({ isInvalid: true })
 			return;
 		}
-		console.log("oui")
-		LoginAPatientWithApi(this.state.mail, this.state.password).then(data => {
-			console.log('ok')
-			console.log(data)
+		LoginAPatientWithApi(this.state.mail, this.state.password).then(async data => {
 			let token = data.login_token
-			console.log(token)
 			if (token !== null) {
 				setToken(token);
-				console.log('juste after add it', getToken())
 				navigate('Home')
 			}
 			else {
@@ -52,13 +47,13 @@ class Login extends React.Component {
 		this.setState({ password: text })
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
 		let { navigate } = this.props.navigation;
-		value = getToken();
-		console.log(value)
-		//if (value !== null) {
-		//	navigate('Home')
-		//}
+		value = await getToken();
+		if (value !== null) {
+			setToken(value);
+			navigate('Home')
+		}
 	}
 
   	render() {

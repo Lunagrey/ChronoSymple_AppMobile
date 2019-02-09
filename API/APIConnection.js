@@ -20,7 +20,6 @@ export function SiginAPatientWithApi (fname, lname, mail, password) {
 }
 
 export function LoginAPatientWithApi (mail, password) {
-  console.log('ta grosse mère')
   return fetch(baseUrl + '/api/login', {
     method: 'POST',
     headers: {
@@ -32,10 +31,8 @@ export function LoginAPatientWithApi (mail, password) {
       password: password
     }),
   })
-  .then((response) => { console.log('réussis') 
-  return response.json() })
-  .catch((error) => { console.log('error') 
-  return error })
+  .then((response) => response.json())
+  .catch((error) => error.json())
 }
 
 export function LogOutAPatientWithApi (token) {
