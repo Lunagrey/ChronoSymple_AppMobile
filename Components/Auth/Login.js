@@ -4,6 +4,7 @@ import React from 'react'
 import { View, Text, Button, TextInput, Dimensions, AsyncStorage } from 'react-native'
 import { LoginAPatientWithApi } from '../../API/APIConnection'
 import { getToken, setToken } from './StoreToken'
+import { connect } from 'react-redux'
 
 class Login extends React.Component {
 	static navigationOptions = {
@@ -14,7 +15,6 @@ class Login extends React.Component {
 
 	constructor(props) {
 		super(props)
-		AsyncStorage.clear()
 		this.state = { mail: "", password: "", isInvalid: false }
 	}
 
@@ -29,6 +29,8 @@ class Login extends React.Component {
 			let token = data.login_token
 			if (token !== null) {
 				setToken(token);
+				const action = { type: "TOGGLE_FAVORITE", value: token }
+				this.props.dispatch(action)
 				navigate('Home')
 			}
 			else {
@@ -49,11 +51,13 @@ class Login extends React.Component {
 
 	async componentDidMount() {
 		let { navigate } = this.props.navigation;
-		value = await getToken();
-		if (value !== null) {
-			setToken(value);
-			navigate('Home')
-		}
+		token = await getToken();
+		//if (token !== null) {
+		//	setToken(token);
+		//	const action = { type: "TOGGLE_FAVORITE", value: token }
+		//	this.props.dispatch(action)
+		//	avigate('Home')
+		//}
 	}
 
   	render() {
@@ -97,4 +101,10 @@ class Login extends React.Component {
 	}
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+	return {
+		token: state.token
+	}
+      }
+      
+export default connect(mapStateToProps)(Login)

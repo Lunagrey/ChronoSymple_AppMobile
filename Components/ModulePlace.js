@@ -5,33 +5,40 @@ import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity, Image, Fla
 import { Icon } from 'react-native-elements'
 import { TouchableRipple } from 'react-native-paper';
 import ModuleItem from './ModuleItem'
-import { APIGetModules,  } from '../API/APIModule'
+import { APIGetModules, APIAddModule } from '../API/APIModule'
 import { getToken } from './Auth/StoreToken'
+import { connect } from 'react-redux'
 
 class ModulePlace extends React.Component {
 	constructor (props) {
 		super(props)
-		//this.modules
-		//this.token
+
 		this.state = {
-			modules: []
+			Dmodules: []
 		}
-		this.getModules()
-	}
-
-	async getModules() {
-		this.token = await getToken();
-		if (value !== null) {
+		APIGetModules(this.props.token).then(data => {
 			this.setState({
-				modules: await APIGetModules(value)
+			  Dmodules: [ ...this.state.Dmodules, ...data.modules ],
 			})
-		//	console.log(this.modules)
-		}
+		})
 	}
 
-	_addModule = (idFilm) => {
-		console.log("Display film " + idFilm)
-		this.props.navigation.navigate('HomeModule', {idModule: idModule})
+	_toggleFavorite() {
+		const action = { type: "TOGGLE_FAVORITE", value: this.state.film }
+		this.props.dispatch(action)
+
+	}
+
+	_addModule = (idModule) => {
+		console.log("Display film " + idModule)
+		console.log('token ' + this.props.token)
+		APIAddModule(this.props.token, idModule).then(data => {
+			console.log(data.status)
+			if (data.status == 200)
+				this.props.navigation.navigate('HomeModule', {idModule: idModule})
+			else
+				this.props.navigation.navigate('Login', {idModule: idModule})
+		})
 	}
 	
 	_searchModule = () => {
@@ -39,46 +46,19 @@ class ModulePlace extends React.Component {
 	}
 
 	render() {
-	let { navigate } = this.props.navigation;
-		return (
-			<View style={styles.main_container}>
-				{console.log(this.state.modules)}
-				<View style={styles.search}>
-					<Icon name='search' style={styles.searchelem}/> 
-					<TextInput
-						style={styles.searchelem}
-						placeholder='Nom du module'
-						onSubmitEditing={() => this._searchModule()}
-					/>
-				</View>
-				<View style={styles.module}>
-					<FlatList
-					        style={styles.list}
-						data={this.props.modules}
-						keyExtractor={(item) => item.id.toString()}
-						renderItem={({item}) => (
-							<ModuleItem
-								module={item}
-								_addModule={this._addModule}
-							/>
-						)}
-				/*	onEndReachedThreshold={0.5}
-				 	onEndReached={() => {
-						if (!this.props.favoriteList && this.props.page < this.props.totalPages) {
-							this.props.loadFilms()
-						}
-					}} */
-					/>
-				</View>
-				{/* <View style={styles.module}>
-					<TouchableOpacity
-						onPress={() => navigate('HomeModule')}
-						title="OHLALA J'ADD LE MODULE DIABETE"
-					>
-					<Image source={require("../Images/diamodule.png")}/>
-					</TouchableOpacity>
-				</View> */}
-			</View>
+		let { navigate } = this.props.navigation;
+		return(
+			<FlatList
+				style={styles.list}
+				data={this.state.Dmodules}
+				keyExtractor={(item) => item.id.toString()}
+				renderItem={({item}) => (
+				  <ModuleItem
+				    dModule={item}
+				    _addModule={this._addModule}
+				  />
+				)}
+			/>
 		)
 	}
 }
@@ -103,8 +83,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	list: {
-    		flex: 1
+		flex: 1,
   	}
 })
 
-export default ModulePlace;
+const mapStateToProps = (state) => {
+	return {
+	  token: state.token
+	}
+      }
+      
+export default connect(mapStateToProps)(ModulePlace)

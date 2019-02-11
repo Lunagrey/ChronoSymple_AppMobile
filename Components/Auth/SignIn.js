@@ -25,11 +25,9 @@ class SignIn extends React.Component {
 		    return;
 		}
 
-		console.log('come here')
 		SiginAPatientWithApi(this.state.fname, this.state.lname, this.state.mail, this.state.password).then(data => {
-		console.log(data)
 		let token = data.login_token
-		console.log(token)
+
 		if (token)
 			navigate('Login')
 		else {

@@ -32,7 +32,7 @@ export function LoginAPatientWithApi (mail, password) {
     }),
   })
   .then((response) => response.json())
-  .catch((error) => error.json())
+  .catch((error) => error)
 }
 
 export function LogOutAPatientWithApi (token) {
