@@ -33,7 +33,6 @@ class ModulePlace extends React.Component {
 		console.log("Display film " + idModule)
 		console.log('token ' + this.props.token)
 		APIAddModule(this.props.token, idModule).then(data => {
-			console.log(data.status)
 			if (data.status == 200)
 				this.props.navigation.navigate('HomeModule', {idModule: idModule})
 			else

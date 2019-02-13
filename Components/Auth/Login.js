@@ -3,6 +3,7 @@
 import React from 'react'
 import { View, Text, Button, TextInput, Dimensions, AsyncStorage } from 'react-native'
 import { LoginAPatientWithApi } from '../../API/APIConnection'
+import { APIGetPatientModules } from '../../API/APIModule'
 import { getToken, setToken } from './StoreToken'
 import { connect } from 'react-redux'
 
@@ -26,22 +27,24 @@ class Login extends React.Component {
 			return;
 		}
 		LoginAPatientWithApi(this.state.mail, this.state.password).then(async data => {
-			let token = data.login_token
-			if (token !== null) {
+			console.log(data)
+			if (data.status == 200) {
+				let response = await data.json()
+				let token = response.login_token
 				setToken(token);
+				console.log(token)
 				const action = { type: "TOGGLE_FAVORITE", value: token }
 				this.props.dispatch(action)
-				navigate('Home')
+				if (token !== null)
+					navigate('Home')
 			}
 			else {
-				var tabErrors = data.errors
 				this.setState({ isInvalid: true, errorText: "Problème de connection" })
-				return;
 			}
 		});
 	}
-
 	setMail = (text) => {
+
 		this.setState({ mail: text })
 	}
 
@@ -52,12 +55,15 @@ class Login extends React.Component {
 	async componentDidMount() {
 		let { navigate } = this.props.navigation;
 		token = await getToken();
-		//if (token !== null) {
-		//	setToken(token);
-		//	const action = { type: "TOGGLE_FAVORITE", value: token }
-		//	this.props.dispatch(action)
-		//	avigate('Home')
-		//}
+	
+		await APIGetPatientModules(token).then(async data => {
+			if (data.status == 200) {
+				setToken(token);
+				const action = { type: "TOGGLE_FAVORITE", value: token }
+				this.props.dispatch(action)
+				navigate('Home')
+			}
+		})
 	}
 
   	render() {
@@ -105,6 +111,6 @@ const mapStateToProps = (state) => {
 	return {
 		token: state.token
 	}
-      }
-      
+}
+
 export default connect(mapStateToProps)(Login)

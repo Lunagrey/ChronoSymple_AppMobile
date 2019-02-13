@@ -2,6 +2,8 @@
 
 import React from 'react'
 import { View, Text, Button, BackHandler, StyleSheet, TouchableOpacity} from 'react-native'
+import { APIGetPatientModules } from '../API/APIModule'
+import { connect } from 'react-redux'
 
 const MenuImage = ({navigation}) => {
 	if(!navigation.state.isDrawerOpen){
@@ -44,6 +46,13 @@ class Home extends React.Component {
 	}
 
 	componentDidMount() {
+		APIGetPatientModules(this.props.token).then(async data => {
+			if (data.status == 200) {
+				let response = await data.json()
+				if (response.modules.length > 0)
+					this.props.navigation.navigate('HomeModule', {idModule: response.modules[0].id})
+			}
+		})
 		BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
 	}
 
@@ -66,4 +75,11 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default Home;
+
+const mapStateToProps = (state) => {
+	return {
+	  token: state.token
+	}
+      }
+      
+export default connect(mapStateToProps)(Home)

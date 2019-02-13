@@ -12,7 +12,6 @@ export function APIAddModule (token, id) {
 	.catch((error) => error)
 }
 
-
 export function APIGetModules(token) {
 	return fetch(baseUrl + '/api/modules', {
 	  method: 'GET',
@@ -22,5 +21,17 @@ export function APIGetModules(token) {
 	  },
 	})
 	.then((response) => response.json())
+	.catch((error) => error)
+}
+
+export function APIGetPatientModules(token) {
+	return fetch(baseUrl + '/api/patient/modules', {
+	  method: 'GET',
+	  headers: {
+	    Accept: 'application/json',
+	    'Authorization': token,
+	  },
+	})
+	.then((response) => response)
 	.catch((error) => error)
 }

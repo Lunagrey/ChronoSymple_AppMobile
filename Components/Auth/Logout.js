@@ -3,21 +3,25 @@
 import React from 'react'
 import { View, Text, TextInput, Button, Dimensions} from 'react-native'
 import { LogOutAPatientWithApi } from '../../API/APIConnection'
-import { getToken } from './StoreToken'
+import { getToken, remove, removeToken } from './StoreToken'
+import { connect } from 'react-redux'
 
 class Logout extends React.Component {
 	constructor (props) {
 		super(props)
-//		let statu = LogOutAPatientWithApi(getToken());
-		console.log(getToken())
+	}
 		
-		//if (ret == data) {
-			//	
-			//}
-		}
-		
-		componentDidMount() {
-//			let statu = LogOutAPatientWithApi(getToken());
+	componentDidMount() {
+		LogOutAPatientWithApi(this.props.token).then(async data => {
+			if (data.status == 200) {
+				await removeToken()
+				this.props.navigation.navigate('LoginStack');
+			}
+			else {
+				this.props.navigation.goBack();
+			}
+		})
+		.catch()
 	}
 
 	render() {
@@ -27,4 +31,10 @@ class Logout extends React.Component {
 	}
 }
 
-export default Logout;
+const mapStateToProps = (state) => {
+	return {
+	  token: state.token
+	}
+      }
+      
+export default connect(mapStateToProps)(Logout)

@@ -31,7 +31,7 @@ export function LoginAPatientWithApi (mail, password) {
       password: password
     }),
   })
-  .then((response) => response.json())
+  .then((response) => response)
   .catch((error) => error)
 }
 
@@ -40,12 +40,9 @@ export function LogOutAPatientWithApi (token) {
     method: 'POST',
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      token: token
-    }),
+      'Authorization': token,
+    }
   })
-  .then((response) => response )
+  .then((response) => response)
   .catch((error) => error)
 }

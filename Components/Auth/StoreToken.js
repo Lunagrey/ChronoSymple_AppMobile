@@ -17,3 +17,11 @@ export async function setToken(token) {
 		return error.message;
 	}
 }
+
+export async function removeToken(token) {
+	try {
+		await AsyncStorage.removeItem('token');
+	} catch (error) {
+		return error.message;
+	}
+}

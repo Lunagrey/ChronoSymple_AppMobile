@@ -5,7 +5,8 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 
 class ModuleItem extends React.Component {
 	render() {
-		const { dModule, _addModule } = this.props
+    const { dModule, _addModule } = this.props
+    console.log("OUIIIIIIIIIIIIIIiii")
 		return (
 			<TouchableOpacity
 				style={{
