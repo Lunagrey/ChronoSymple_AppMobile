@@ -45,21 +45,21 @@ const ExportStackNavigator = createStackNavigator({
 
 const ModuleTabNavigator = createBottomTabNavigator(
 {
-  Home: {
-    screen: HomeModuleStackNavigator
+	Home: {
+    	screen: HomeModuleStackNavigator
 	},
-  Note: {
-    screen: NoteStackNavigator
-  },
-  Calendar: {
-  	screen: CalendarStackNavigator
-  },
-  Statistic: {
-    screen: StatisticStackNavigator
-  },
-  Export: {
-    screen: ExportStackNavigator
+  	Note: {
+	    screen: NoteStackNavigator
+  	},
+  	Calendar: {
+	  	screen: CalendarStackNavigator
+  	},
+  	Statistic: {
+	    screen: StatisticStackNavigator
 	},
+	Export: {
+	    screen: ExportStackNavigator
+	}
 },
 {
 	headerMode: 'none'
