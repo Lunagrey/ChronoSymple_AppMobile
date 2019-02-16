@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {createStackNavigator, createDrawerNavigator, createBottomTabNavigator, createAppContainer} from 'react-navigation';
 import { DrawerActions } from 'react-navigation';
-import {TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {TouchableOpacity, StyleSheet, Image, Text} from 'react-native';
 
 import Login from '../Components/Auth/Login';
 import SignIn from '../Components/Auth/SignIn';
@@ -16,7 +16,7 @@ import DoctorChoice from '../Components/DoctorChoice';
 import Statistic from '../Components/Statistic';
 import Export from '../Components/Export';
 import Note from '../Components/Note';
-import { Icon } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Button } from 'react-native-paper';
 
 const HomeModuleStackNavigator = createStackNavigator({
@@ -61,12 +61,51 @@ const DoctorChoiceStackNavigator = createStackNavigator({
 })
 
 const Tabs = createBottomTabNavigator({
-	Home: HomeModule,
-	Note: Note,
-	Calendar: Calendar,
-	Statistic: Statistic,
-	Export: Export,
-	Logout: Logout
+	Home: {
+		screen : HomeModule,
+		navigationOptions: {
+			tabBarLabel:"Home",
+			tabBarIcon: ({ tintColor }) => (
+			  <Icon name="home" size={20}/>
+			)
+		},
+	},
+	Note: {
+		screen : Note,
+		navigationOptions: {
+			tabBarLabel:"Note",
+			tabBarIcon: ({ tintColor }) => (
+			  <Icon name="note" size={20}/>
+			)
+		},
+	},
+	Calendar: {
+		screen : Calendar,
+		navigationOptions: {
+			tabBarLabel:"Calendar",
+			tabBarIcon: ({ tintColor }) => (
+			  <Icon name="perm-contact-calendar" size={20}/>
+			)
+		},
+	},
+	Statistic: {
+		screen : Statistic,
+		navigationOptions: {
+			tabBarLabel:"Statistic",
+			tabBarIcon: ({ tintColor }) => (
+			  <Icon name="timeline" size={20}/>
+			)
+		},
+	},
+	Export: {
+		screen : Export,
+		navigationOptions: {
+			tabBarLabel:"Export",
+			tabBarIcon: ({ tintColor }) => (
+			  <Icon name="import-export" size={20}/>
+			)
+		},
+	},
 },{
 	headerMode: 'none'
 });
@@ -74,9 +113,9 @@ const Tabs = createBottomTabNavigator({
 
 const MenuImage = ({navigation}) => {
 	if(!navigation.state.isDrawerOpen){
-		return <Icon color="white" name="menu" size={30} />
+		return <Icon color="white" name="menu" size={30} marginLeft={10} />
 	}else{
-		return <Icon color="white" name="arrow-back" size={30} />
+		return <Icon color="white" name="arrow-back" size={30} marginLeft={10} />
 	}
 
 }
@@ -98,6 +137,10 @@ const DrawerNavigator = createDrawerNavigator({
 				headerLeft: 
 				<TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
 					<MenuImage navigation={navigation}/>
+				</TouchableOpacity>,
+				headerRight:
+				<TouchableOpacity onPress={() => navigation.navigate('Logout') }>
+					<Icon color="white" name="exit-to-app" size={30} marginRight={10} />
 				</TouchableOpacity>,
 				headerStyle: {
 					backgroundColor: '#58b57d',

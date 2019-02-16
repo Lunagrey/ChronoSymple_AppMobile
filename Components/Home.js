@@ -16,19 +16,10 @@ const MenuImage = ({navigation}) => {
 
 class Home extends React.Component {
  
-	//static navigationOptions = {
-	//	title: 'Chat',
-	//	headerStyle: { backgroundColor: 'red' },
-	//	headerTitleStyle: { color: 'green' },
-	//      }
 	static navigationOptions = {
 		headerStyle: {backgroundColor: '#58b57d'},
 		headerTintColor: 'white',
-		title: 'foẑekfg',  // Title to appear in status bar
-		/*headerLeft: <TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
-				<MenuImage navigation={this}/>
-		</TouchableOpacity>,*/
-		//headerLeft: <Button onPress={() => props.navigation.navigate('DrawerOpen')} title= "=" />
+		title: 'foẑekfg'
 	}
 
 	render() {

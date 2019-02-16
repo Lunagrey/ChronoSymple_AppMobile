@@ -9,12 +9,16 @@ import { connect } from 'react-redux'
 class Logout extends React.Component {
 	constructor (props) {
 		super(props)
+		console.log('dpf,prnf,')
 	}
 		
 	componentDidMount() {
+		console.log('ok')
 		LogOutAPatientWithApi(this.props.token).then(async data => {
 			if (data.status == 200) {
 				await removeToken()
+		console.log('ok')
+
 				this.props.navigation.navigate('LoginStack');
 			}
 			else {
