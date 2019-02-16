@@ -51,7 +51,7 @@ class DrawerScreen extends Component {
 	listModule() {
 		if (1) {
 		<TouchableOpacity style={{ margin: 20, flex: 1, justifyContent : 'center', alignItems: 'center', flexDirection : 'row'}}
-		onPress={this.navigateToScreen('Stack')}>
+			onPress={this.navigateToScreen('Stack')}>
 			<Image/>
 		</TouchableOpacity>
 		}
@@ -64,7 +64,7 @@ class DrawerScreen extends Component {
 	oui() {
 		this.state.Dmodules.map((item)=>{
 			<TouchableOpacity style={{ margin: 20, flex: 1, justifyContent : 'center', alignItems: 'center', flexDirection : 'row'}}
-							onPress={this.navigateToScreen('Stack')}>
+			onPress={this.navigateToScreen('Stack')}>
 				<Text>{item.name}</Text>
 			</TouchableOpacity>
 		})
@@ -86,14 +86,15 @@ class DrawerScreen extends Component {
 				<ScrollView>
 					<View>
 						<FlatList
-        					  data={this.state.Dmodules}
-						  keyExtractor={(item) => item.id.toString()}
-        					  renderItem={({ item }) => (
-							<TouchableOpacity style={{ margin: 20, flex: 1, justifyContent : 'center', alignItems: 'center', flexDirection : 'row'}}
+        						data={this.state.Dmodules}
+							keyExtractor={(item) => item.id.toString()}
+        						renderItem={({ item }) => (
+							<TouchableOpacity style={{flex: 1, justifyContent : 'center', alignItems: 'center', flexDirection : 'row', backgroundColor: item.color,
+							borderColor: 'black', borderRadius: 0.5, margin: 5, padding: 20, borderWidth: 3}}
 							onPress={this.navigateToScreen('HomeModule', {idModule: item.id})}>
-								<Text style={{ flex: 2, marginLeft: 20 , backgroundColor: '#fff', fontSize: 20}}>{item.name}</Text>
+								<Text style={{fontSize: 20}}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</Text>
 							</TouchableOpacity>
-        					  )}
+        						)}
         					/>
 						<TouchableOpacity style={{ margin: 20, flex: 1, justifyContent : 'center', alignItems: 'center', flexDirection : 'row'}}
 							onPress={this.navigateToScreen('Stack')}>
