@@ -1,7 +1,7 @@
 // Components/SignUp.js
 
 import React from 'react'
-import { View, Text, TextInput, Button, Dimensions} from 'react-native'
+import { View, Text, ActivityIndicator, StyleSheet} from 'react-native'
 import { LogOutAPatientWithApi } from '../../API/APIConnection'
 import { getToken, remove, removeToken } from './StoreToken'
 import { connect } from 'react-redux'
@@ -9,16 +9,12 @@ import { connect } from 'react-redux'
 class Logout extends React.Component {
 	constructor (props) {
 		super(props)
-		console.log('dpf,prnf,')
 	}
 		
 	componentDidMount() {
-		console.log('ok')
 		LogOutAPatientWithApi(this.props.token).then(async data => {
 			if (data.status == 200) {
 				await removeToken()
-		console.log('ok')
-
 				this.props.navigation.navigate('LoginStack');
 			}
 			else {
@@ -30,10 +26,23 @@ class Logout extends React.Component {
 
 	render() {
 		return (
-			<Text>SignOut</Text>
+			<View style={styles.main_container}>
+				<Text style={{fontSize: 20}}>A la prochaine !</Text>
+				<Text>{"\n"}</Text>
+				<ActivityIndicator size='large' />
+			</View>
 		)
 	}
 }
+
+
+const styles = StyleSheet.create({
+	main_container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+})
 
 const mapStateToProps = (state) => {
 	return {

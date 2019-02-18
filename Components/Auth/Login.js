@@ -35,8 +35,17 @@ class Login extends React.Component {
 				console.log(token)
 				const action = { type: "TOGGLE_FAVORITE", value: token }
 				this.props.dispatch(action)
-				if (token !== null)
-					navigate('Home')
+				if (token !== null) {
+					APIGetPatientModules(this.props.token).then(async data => {
+						if (data.status == 200) {
+							let response = await data.json()
+							if (response.modules.length > 0)
+								this.props.navigation.navigate('HomeModule', {idModule: response.modules[0].id})
+							else
+								navigate('Home')
+						}
+					})
+				}
 			}
 			else {
 				this.setState({ isInvalid: true, errorText: "Problème de connection" })
@@ -50,20 +59,6 @@ class Login extends React.Component {
 
 	setPassword = (text) => {
 		this.setState({ password: text })
-	}
-
-	async componentDidMount() {
-		let { navigate } = this.props.navigation;
-		token = await getToken();
-	
-		await APIGetPatientModules(token).then(async data => {
-			if (data.status == 200) {
-				setToken(token);
-				const action = { type: "TOGGLE_FAVORITE", value: token }
-				this.props.dispatch(action)
-				navigate('Home')
-			}
-		})
 	}
 
   	render() {

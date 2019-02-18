@@ -6,12 +6,7 @@ import { Icon } from 'react-native-elements'
 import { TouchableRipple } from 'react-native-paper';
 
 class ModulePlace extends React.Component {
-	_searchModule = () => {
-		console.log('faire le filtre ici')
-	}
-
 	render() {
-	let { navigate } = this.props.navigation;
 		return (
 			<View style={styles.main_container}>
 				<Text>JE SUIS UNE NOTE</Text>

@@ -48,27 +48,11 @@ class DrawerScreen extends Component {
 		})
 	}
 
-	listModule() {
-		if (1) {
-		<TouchableOpacity style={{ margin: 20, flex: 1, justifyContent : 'center', alignItems: 'center', flexDirection : 'row'}}
-			onPress={this.navigateToScreen('Stack')}>
-			<Image/>
-		</TouchableOpacity>
-		}
-	}
-
-	_addModule = (idModule) => {
+	/*_changeModule = (idModule) => {
+		const action = { type: "CURRENT_MODULE", value: response.modules[0].id}
+		this.props.dispatch(action)
 		this.props.navigation.navigate('HomeModule', {idModule: idModule})
-	}
-
-	oui() {
-		this.state.Dmodules.map((item)=>{
-			<TouchableOpacity style={{ margin: 20, flex: 1, justifyContent : 'center', alignItems: 'center', flexDirection : 'row'}}
-			onPress={this.navigateToScreen('Stack')}>
-				<Text>{item.name}</Text>
-			</TouchableOpacity>
-		})
-	}
+	}*/
 
 	render () {
 		APIGetPatientModules(this.props.token).then(async data => {

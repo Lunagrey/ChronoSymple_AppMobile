@@ -11,10 +11,11 @@ import DrawerScreen from './DrawerScreen';
 import ModulePlace from '../Components/ModulePlace';
 import HomeModule from '../Components/HomeModule';
 import Calendar from '../Components/Calendar';
-import CalendarNote from '../Components/CalendarNote';
+import DetailNote from '../Components/DetailNote';
 import Statistic from '../Components/Statistic';
 import Export from '../Components/Export';
 import Note from '../Components/Note';
+import Loading from '../Components/Loading'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Button } from 'react-native-paper';
 
@@ -32,8 +33,8 @@ const NoteStackNavigator = createStackNavigator({
 })
 
 const CalendarStackNavigator = createStackNavigator({
-	test: {
-		screen: CalendarNote
+	DetailNote: {
+		screen: DetailNote
 	}
 }, {
 	headerMode: 'none'
@@ -105,10 +106,9 @@ const Tabs = createBottomTabNavigator({
 const MenuImage = ({navigation}) => {
 	if(!navigation.state.isDrawerOpen){
 		return <Icon color="white" name="menu" size={30} marginLeft={10} />
-	}else{
+	} else {
 		return <Icon color="white" name="arrow-back" size={30} marginLeft={10} />
 	}
-
 }
 
 const DrawerNavigator = createDrawerNavigator({
@@ -142,35 +142,41 @@ const DrawerNavigator = createDrawerNavigator({
 				},
 		
 			})
-	});
+});
 
-	const StackNavigtorWhithoutModule = createStackNavigator({
-		Drawer: {
-			screen: DrawerNavigator
-		},
-		Stack: {
-			screen: ModulePlace, navigationOptions: { title:'ModulPlace' }
-		},
-		CalendarStackNavigator: {
-			screen : CalendarStackNavigator
-		}
-	})
+const StackNavigtorWhithoutModule = createStackNavigator({
+	Drawer: {
+		screen: DrawerNavigator
+	},
+	Stack: {
+		screen: ModulePlace, navigationOptions: { title:'ModulPlace' }
+	},
+	CalendarStackNavigator: {
+		screen : CalendarStackNavigator
+	}
+})
 
-	const LoginStack = createStackNavigator({
-		Login: { screen: Login },
-		SignIn: { screen: SignIn }
-	})
+const LoginStack = createStackNavigator({
+	Login: { screen: Login },
+	SignIn: { screen: SignIn },
+})
 
-	const StackNavigator = createStackNavigator({
-		LoginStack: {
-			screen: LoginStack, headerMode : 'none'
+const StackNavigator = createStackNavigator({
+	Loading: Loading,
+	LoginStack: {
+		screen: LoginStack, headerMode : 'none'
+	},
+	Drawer: {
+		screen: StackNavigtorWhithoutModule
+	},
+	Logout: { screen : Logout,
+		navigationOptions: {
+			headerMode: 'none'
 		},
-		Drawer: {
-			screen: StackNavigtorWhithoutModule
-		},
-	},{
-		initialRouteName : 'LoginStack',
-		headerMode: 'none'
-	});
+	}
+},{
+	initialRouteName : 'Loading',
+	headerMode: 'none'
+});
 	  
 export default createAppContainer(StackNavigator);
