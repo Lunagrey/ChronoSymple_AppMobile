@@ -35,3 +35,15 @@ export function APIGetPatientModules(token) {
 	.then((response) => response)
 	.catch((error) => error)
 }
+
+export function APIGetDoctors(token) {
+	return fetch(baseUrl + '/api/doctors', {
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+			'Authorization': token,
+		},
+	})
+	.then((response) => response)
+	.catch((error) => error)
+}

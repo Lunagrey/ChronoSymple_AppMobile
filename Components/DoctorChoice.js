@@ -15,6 +15,7 @@ import { View,
 	Image} from 'react-native'
 import { Icon } from 'react-native-elements'
 import { TouchableRipple } from 'react-native-paper';
+import { APIGetDoctors } from '../API/APIModule';
 import { connect } from 'react-redux';
 
 
@@ -29,66 +30,44 @@ class DoctorChoice extends React.Component {
 	}
 
 	componentWillMount () {
-		APIGetPatientModules(this.props.token).then(data => {
+		APIGetDoctors(this.props.token).then(async data => {
+			let response = await data.json()
+			console.log("toto 12456789");
+			console.log(data)
+			console.log("-----")
+			console.log(response.users)
+			console.log("-----")
+			for (var i = response.users.length - 1; i >= 0; i--) {
+				console.log(i)
+				console.log(response.users[i].id)
+			}
+			this.setState({
+				data: [...response.users],
+			})
 		})
 	}
-
 
 
 	render() {
 		let { navigate } = this.props.navigation;
 		let deviceWidth = Dimensions.get('window').width
-		this._getDoctorList()
 		return (
 			<View>
 				<FlatList
-  					data={[
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  						{FirstName: 'Caila', LastName: "Alexandre", email: 'alexandre.caila@toto.toto'},
-  						{FirstName: 'four', LastName: "ma", email: 'ma.four@toto.toto'},
-  					]}
+  					data={this.state.data}
+  					keyExtractor={(item) => item.id.toString()}
   					renderItem={({item, separators}) => (
     					<TouchableHighlight
       						onPress={() => {}}
       						onShowUnderlay={separators.highlight}
       						onHideUnderlay={separators.unhighlight}>
       						<View style={{backgroundColor: 'white', borderBottomWidth: 1, justifyContent: 'center'}}>
-        						<Text style={{margin: 15}}>{item.FirstName} {item.LastName}</Text>
+        						<Text style={{margin: 15}}>{item.first_name} {item.last_name}</Text>
       						</View>
     					</TouchableHighlight>
   					)}
 				/>
+				{this.state.data}
       		</View>
 		)
 	}
