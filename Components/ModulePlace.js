@@ -1,12 +1,9 @@
 // Components/ModulePlace.js
 
 import React from 'react'
-import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity, Image, FlatList} from 'react-native'
-import { Icon } from 'react-native-elements'
-import { TouchableRipple } from 'react-native-paper';
+import { StyleSheet, FlatList} from 'react-native'
 import ModuleItem from './ModuleItem'
 import { APIGetModules, APIAddModule } from '../API/APIModule'
-import { getToken } from './Auth/StoreToken'
 import { connect } from 'react-redux'
 
 class ModulePlace extends React.Component {
@@ -30,8 +27,8 @@ class ModulePlace extends React.Component {
 	}
 
 	_addModule = (idModule) => {
-		console.log("Display film " + idModule)
-		console.log('token ' + this.props.token)
+		const action = { type: "CURRENT_MODULE", value: idModule }
+		this.props.dispatch(action)
 		APIAddModule(this.props.token, idModule).then(data => {
 			if (data.status != 401)
 				this.props.navigation.navigate('HomeModule', {idModule: idModule})
@@ -45,7 +42,6 @@ class ModulePlace extends React.Component {
 	}
 
 	render() {
-		let { navigate } = this.props.navigation;
 		return(
 			<FlatList
 				style={styles.list}

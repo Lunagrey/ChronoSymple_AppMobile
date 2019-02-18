@@ -1,9 +1,12 @@
+import { stringify } from "qs";
+
+//xconst baseUrl = 'http://127.0.0.1:3000'
 const baseUrl = 'http://10.41.160.84:3000'
 
 export function APIAddModule (token, id) {
-	console.log('id ' + id, ' tpken ' + token)
-	return fetch(baseUrl + '/api/patient/add_module/' + id, {
-		method: 'POST',
+	console.log('id ' + id, ' token ' + token)
+	return fetch(baseUrl + '/api/patients/add_module/' + id, {
+		method: 'PATCH',
 		headers: {
 	    'Authorization': token
 		}
@@ -25,12 +28,40 @@ export function APIGetModules(token) {
 }
 
 export function APIGetPatientModules(token) {
-	return fetch(baseUrl + '/api/patient/modules', {
+	return fetch(baseUrl + '/api/patients/modules', {
 	  method: 'GET',
 	  headers: {
 	    Accept: 'application/json',
 	    'Authorization': token,
 	  },
+	})
+	.then((response) => response)
+	.catch((error) => error)
+}
+
+export function APIGetPatientNotesByModule(token, idmodule) {
+	return fetch(baseUrl + '/api/notes', {
+	  method: 'GET',
+	  headers: {
+	    Accept: 'application/json',
+			'Authorization': token
+		}
+	})
+	.then((response) => response.json())
+	.catch((error) => error)
+}
+
+export function APIAddPatientNotes(token, datJson, idModule) {
+	return fetch(baseUrl + '/api/patient/modules', {
+	  method: 'POST',
+	  headers: {
+	    Accept: 'application/json',
+	    'Authorization': token,
+		},
+		body: JSON.stringify({
+				data: datJson,
+				module_id: idModule
+		})
 	})
 	.then((response) => response)
 	.catch((error) => error)
@@ -47,3 +78,17 @@ export function APIGetDoctors(token) {
 	.then((response) => response)
 	.catch((error) => error)
 }
+/*
+export function APIGetPatientModules(token) {
+	return fetch(baseUrl + '/api/patient/modules', {
+	  method: 'GET',
+	  headers: {
+	    Accept: 'application/json',
+	    'Authorization': token,
+	  },
+	})
+	.then((response) => response)
+	.catch((error) => error)
+}
+
+*/

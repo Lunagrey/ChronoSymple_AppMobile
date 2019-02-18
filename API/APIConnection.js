@@ -1,3 +1,4 @@
+//const baseUrl = 'http://192.168.122.1:3000'
 const baseUrl = 'http://10.41.160.84:3000'
 
 export function SiginAPatientWithApi (fname, lname, mail, password) {
