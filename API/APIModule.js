@@ -4,7 +4,7 @@ import { stringify } from "qs";
 const baseUrl = 'http://10.41.160.84:3000'
 
 export function APIAddModule (token, id) {
-	console.log('id ' + id, ' tpken ' + token)
+	console.log('id ' + id, ' token ' + token)
 	return fetch(baseUrl + '/api/patients/add_module/' + id, {
 		method: 'PATCH',
 		headers: {
@@ -67,6 +67,17 @@ export function APIAddPatientNotes(token, datJson, idModule) {
 	.catch((error) => error)
 }
 
+export function APIGetDoctors(token) {
+	return fetch(baseUrl + '/api/doctors', {
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+			'Authorization': token,
+		},
+	})
+	.then((response) => response)
+	.catch((error) => error)
+}
 /*
 export function APIGetPatientModules(token) {
 	return fetch(baseUrl + '/api/patient/modules', {
