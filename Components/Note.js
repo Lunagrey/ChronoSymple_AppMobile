@@ -8,7 +8,7 @@ import { APIAddPatientNotes } from '../API/APIModule'
 class Note extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { glycemie: "", glucide: "", insulineavrepas: "", Insulineaprepas: "", insulineajeun: "", date: "", heure: ""}
+		this.state = { glycemie: "", glucide: "", insulineavrepas: "", Insulineaprepas: "", insulineajeun: "", date: "", heure: "", isSend: false}
 	}
 
 	setPassword = (text) => { 
@@ -35,6 +35,7 @@ class Note extends React.Component {
 			"heure": horaire
 		}
 		APIAddPatientNotes(this.props.token, myTab, this.props.idCurrentModule).then(data => {})
+		this.setState({ isSend: true })
 	}
 
 	setGlicemie = (text) => {
@@ -57,14 +58,15 @@ class Note extends React.Component {
 	    this.setState({ insulineajeun: text})
 	}
 
-  	render() {
-  		let deviceWidth = Dimensions.get('window').width
-	    return (
-      	<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-	        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Declaration de symptome{'\n\n\n'}</Text>
-	        <View style={{flexDirection: 'row', marginLeft: deviceWidth / 7, marginRight: deviceWidth / 7}}>
-	        	<Text style={{flex: 1}}> Glycemie:</Text>
-	        	<TextInput
+	render() {
+		let deviceWidth = Dimensions.get('window').width
+		let successMessage = "La note a bien été envoyé."
+		return (
+		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+			<Text style={{ fontSize: 20, fontWeight: 'bold' }}>Declaration de symptome{'\n\n\n'}</Text>
+			<View style={{flexDirection: 'row', marginLeft: deviceWidth / 7, marginRight: deviceWidth / 7}}>
+				<Text style={{flex: 1}}> Glycemie:</Text>
+				<TextInput
 				placeholder="Glycémie"
 				style={{ flex: 1, height: 25, width: deviceWidth / 3, borderBottomWidth: 1}}
 				onChangeText={(text) => this.setGlicemie(text)}
@@ -73,8 +75,8 @@ class Note extends React.Component {
 			</View>
 			<Text>{"\n"}</Text>
 			<View style={{flexDirection: 'row', marginLeft: deviceWidth / 7, marginRight: deviceWidth / 7}}>
-	        	<Text style={{flex: 1}}> Glucide:</Text>
-	        	<TextInput
+				<Text style={{flex: 1}}> Glucide:</Text>
+				<TextInput
 				placeholder="Glucide"
 				style={{ flex: 1, height: 25, width: deviceWidth / 3, borderBottomWidth: 1}}
 				onChangeText={(text) => this.setGlucide(text)}
@@ -103,8 +105,8 @@ class Note extends React.Component {
 			</View>
 			<Text>{"\n"}</Text>
 			<View style={{flexDirection: 'row', marginLeft: deviceWidth / 7, marginRight: deviceWidth / 7}}>
-	        	<Text style={{flex: 1}}> Insuline a jeun:</Text>
-	        	<TextInput
+				<Text style={{flex: 1}}> Insuline a jeun:</Text>
+				<TextInput
 				placeholder="Insuline a jeun"
 				style={{ flex: 1, height: 25, width: deviceWidth / 3, borderBottomWidth: 1}}
 				onChangeText={(text) => this.setInsulineajeun(text)}
@@ -118,9 +120,10 @@ class Note extends React.Component {
 				onPress={() => {this._addNote()}} 
 				title="Valider la prise de note"
 			/>
+			{this.state.isSend && <Text style={{ color: 'green' }}>{"\n"}{successMessage}</Text>}
 		</View>
-    	)
-  	}
+		)
+	}
 }
 
 
