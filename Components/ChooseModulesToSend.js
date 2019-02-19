@@ -57,14 +57,14 @@ class ChooseModulesToSend extends React.Component {
 					<TouchableOpacity
 						style={{
 							flex: 1,
-							margin: 5,
 							alignItems: 'center',
 							justifyContent: 'center',
 							borderWidth: 3,
-							borderColor: this.state.data[i].color,
+							borderColor: 'black',
+							borderRadius: 10,
 							backgroundColor : this.state.data[i].color,
-							borderRadius: 0.5,
-							padding: 30
+							padding: 30,
+							marginBottom: 30,
 						}}
 						onPress={() => navigate('Export')}>
 						<Text>{this.state.data[i].name}</Text>
