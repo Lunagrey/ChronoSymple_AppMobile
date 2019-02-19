@@ -1,14 +1,14 @@
 // Components/Note.js
 
 import React from 'react'
-import { View, Dimensions,  Text, TextInput, Button} from 'react-native'
+import { View, Dimensions,  Text, TextInput, Button, Alert} from 'react-native'
 import { connect } from 'react-redux'
-import { APIGetPatientNotesByModule } from '../API/APIModule'
+import { APIAddPatientNotes } from '../API/APIModule'
 
 class Note extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { glicemie: "", glucide: "", insulineavrepas: "", Insulineaprepas: "", insulineajeun: "", date: "", heure: ""}
+		this.state = { glycemie: "", glucide: "", insulineavrepas: "", Insulineaprepas: "", insulineajeun: "", date: "", heure: ""}
 	}
 
 	setPassword = (text) => { 
@@ -16,26 +16,29 @@ class Note extends React.Component {
 	}
 
 	_addNote = () => {
+		var now =  new Date()
+		var annee   = now.getFullYear();
+		var month    = now.getMonth() + 1;
+		var jour    = now.getDate();
+		var heure   = now.getHours();
+		var minute  = now.getMinutes();
+		var seconde = now.getSeconds();
+		var date = jour + '/' + month + '/' + annee
+		var horaire = heure + 'h' + minute + 'm' + seconde + 's'
 		let myTab = {
-			"Glicemie": this.state.glicemie,
+			"Glycemie": this.state.glycemie,
 			"Glucide": this.state.glucide,
 			"Insuline av.repas": this.state.insulineavrepas,
 			"Insuline ap.repas": this.state.Insulineaprepas,
 			"Insuline a jeun": this.state.insulineajeun,
-			"date": this.state.date,
-			"heure": this.state.heure
+			"date": date,
+			"heure": horair
 		}
-		APIGetPatientNotesByModule(this.props.token, this.props.idCurrentModule).then(data => {
-			console.log(data)
-			this.setState({
-				notes: [ ...this.state.notes, ...data.notes ],
-			})
-		})
-		console.log(myTab)
+		APIAddPatientNotes(this.props.token, myTab, this.props.idCurrentModule).then(data => {})
 	}
 
 	setGlicemie = (text) => {
-		this.setState({ glicemie: text })
+		this.setState({ glycemie: text })
 	}
 
 	setGlucide = (text) => {
@@ -62,9 +65,9 @@ class Note extends React.Component {
 	        <View style={{flexDirection: 'row', marginLeft: deviceWidth / 7, marginRight: deviceWidth / 7}}>
 	        	<Text style={{flex: 1}}> Glicemie:</Text>
 	        	<TextInput
-				placeholder="Glicémie"
+				placeholder="Glycémie"
 				style={{ flex: 1, height: 25, width: deviceWidth / 3, borderBottomWidth: 1}}
-				onChangeText={(text) => his.setGlicemie(text)}
+				onChangeText={(text) => this.setGlicemie(text)}
 				value={this.glicemie}
 			/>
 			</View>
@@ -114,7 +117,6 @@ class Note extends React.Component {
 				style={{ height: 40, borderWidth: 2, borderColor: '#000000' }} 
 				onPress={() => {this._addNote()}} 
 				title="Valider la prise de note"
-				/*title="SI T'APPUIS SUR CE BOUTON TU PASSES AU COMPONENT HOME dans 'Home.js' CA SERA LE BOUTON DE LOGIN"*/
 			/>
 		</View>
     	)

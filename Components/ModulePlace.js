@@ -3,6 +3,7 @@
 import React from 'react'
 import { StyleSheet, FlatList} from 'react-native'
 import ModuleItem from './ModuleItem'
+import NoteItem from './NoteItem'
 import { APIGetModules, APIAddModule } from '../API/APIModule'
 import { connect } from 'react-redux'
 
@@ -15,15 +16,9 @@ class ModulePlace extends React.Component {
 		}
 		APIGetModules(this.props.token).then(data => {
 			this.setState({
-			  Dmodules: [ ...this.state.Dmodules, ...data.modules ],
+				Dmodules: [ ...this.state.Dmodules, ...data.modules ],
 			})
 		})
-	}
-
-	_toggleFavorite() {
-		const action = { type: "TOGGLE_FAVORITE", value: this.state.film }
-		this.props.dispatch(action)
-
 	}
 
 	_addModule = (idModule) => {

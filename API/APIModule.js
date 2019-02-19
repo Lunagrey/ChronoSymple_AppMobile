@@ -1,6 +1,6 @@
 import { stringify } from "qs";
 
-//xconst baseUrl = 'http://127.0.0.1:3000'
+//const baseUrl = 'http://192.168.0.11:3000'
 const baseUrl = 'http://10.41.160.84:3000'
 
 export function APIAddModule (token, id) {
@@ -52,10 +52,10 @@ export function APIGetPatientNotesByModule(token, idmodule) {
 }
 
 export function APIAddPatientNotes(token, datJson, idModule) {
-	return fetch(baseUrl + '/api/patient/modules', {
+	return fetch(baseUrl + '/api/notes', {
 	  method: 'POST',
 	  headers: {
-	    Accept: 'application/json',
+      'Content-Type': 'application/json',			
 	    'Authorization': token,
 		},
 		body: JSON.stringify({

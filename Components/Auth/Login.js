@@ -27,20 +27,21 @@ class Login extends React.Component {
 			return;
 		}
 		LoginAPatientWithApi(this.state.mail, this.state.password).then(async data => {
-			console.log(data)
 			if (data.status == 200) {
 				let response = await data.json()
 				let token = response.login_token
 				setToken(token);
-				console.log(token)
 				const action = { type: "TOGGLE_FAVORITE", value: token }
 				this.props.dispatch(action)
 				if (token !== null) {
 					APIGetPatientModules(this.props.token).then(async data => {
 						if (data.status == 200) {
 							let response = await data.json()
-							if (response.modules.length > 0)
+							if (response.modules.length > 0) {
+								const action = { type: "CURRENT_MODULE", value: response.modules[0].id}
+								this.props.dispatch(action)	
 								this.props.navigation.navigate('HomeModule', {idModule: response.modules[0].id})
+							}
 							else
 								navigate('Home')
 						}

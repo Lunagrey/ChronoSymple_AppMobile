@@ -7,9 +7,14 @@ import { TouchableRipple } from 'react-native-paper';
 
 class ModulePlace extends React.Component {
 	render() {
+		let item = this.props.navigation.getParam('data')
 		return (
 			<View style={styles.main_container}>
-				<Text>JE SUIS UNE NOTE</Text>
+				<Text>Glycemie : {item.Glycemie}</Text>
+				<Text>Glucide : {item.Glycemie}</Text>
+				<Text>Insuline a jeun : {item.Glycemie}</Text>
+				<Text>Insuline avant repas : {item.Glycemie}</Text>
+				<Text>Insuline après repas : {item.Glycemie}</Text>
 			</View>
 		)
 	}
@@ -17,23 +22,10 @@ class ModulePlace extends React.Component {
 
 const styles = StyleSheet.create({
 	main_container: {
-		flex: 1
+		flex: 1, 
+		justifyContent: "center", 
+		alignItems: "center"
 	},
-	search: { 
-		flex: 1,
-		flexDirection: 'row',
-		height: 50,
-		borderColor: '#000000',
-		borderWidth: 0.5,
-		paddingLeft: 5
-	},
-	module: { 
-		flex: 9,
-		height: 50
-	},
-	searchelem: {
-		flex: 1
-	}
 })
 
 export default ModulePlace;

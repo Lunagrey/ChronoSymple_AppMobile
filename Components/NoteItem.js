@@ -1,19 +1,27 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 class NoteItem extends React.Component {
 	render() {
-    const { note, _addNote } = this.props
+		//const { note, _accessDetailNote } = this.props
+		//console.log(item)
 		return (
-			<TouchableOpacity
-				style={styles.note}
-				onPress={() => _accessDetailNote(note.id)}>
-					<Text>{note.date}</Text>
-			</TouchableOpacity>
+			<View></View>
 		)
+		//	<FlatList style={styles.list}
+		//		data={note}
+		//		keyExtractor={(item) => item.id.toString()}
+		//		renderItem={({item}) => (
+		//			<TouchableOpacity
+		//				style={styles.note}
+		//				onPress={() => _accessDetailNote(item)}>
+		//					<Text>{item} + {item}</Text>
+		//			</TouchableOpacity>
+		//	)}/>
+		//)
 	}
 }
-
+/* 
 const styles = StyleSheet.create({
 	main_container: {
 		margin: 10
@@ -29,6 +37,6 @@ const styles = StyleSheet.create({
 		padding: 30,
 		color: '#000'
 	},
-})
+}) */
 
 export default NoteItem
