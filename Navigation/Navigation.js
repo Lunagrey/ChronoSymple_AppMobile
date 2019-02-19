@@ -12,6 +12,7 @@ import ModulePlace from '../Components/ModulePlace';
 import HomeModule from '../Components/HomeModule';
 import Calendar from '../Components/Calendar';
 import DoctorChoice from '../Components/DoctorChoice';
+import ChooseModulesToSend from '../Components/ChooseModulesToSend';
 import DetailNote from '../Components/DetailNote';
 import Statistic from '../Components/Statistic';
 import Export from '../Components/Export';
