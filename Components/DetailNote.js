@@ -11,10 +11,10 @@ class ModulePlace extends React.Component {
 		return (
 			<View style={styles.main_container}>
 				<Text>Glycemie : {item.Glycemie}</Text>
-				<Text>Glucide : {item.Glycemie}</Text>
-				<Text>Insuline a jeun : {item.Glycemie}</Text>
-				<Text>Insuline avant repas : {item.Glycemie}</Text>
-				<Text>Insuline après repas : {item.Glycemie}</Text>
+				<Text>Glucide : {item.Glucide}</Text>
+				<Text>Insuline a jeun : {item.InsulineAvRepas}</Text>
+				<Text>Insuline avant repas : {item.InsulineApRepas}</Text>
+				<Text>Insuline après repas : {item.InsulineAJeun}</Text>
 			</View>
 		)
 	}

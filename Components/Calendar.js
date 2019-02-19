@@ -14,6 +14,7 @@ class Calendar extends React.Component {
 			DNotes: []
 		}
 		APIGetPatientNotesByModule(this.props.token, this.props.idCurrentModule).then(data => {
+			console.log(data)
 			this.setState({
 				DNotes: [ ...data.notes ]
 			})
@@ -21,11 +22,21 @@ class Calendar extends React.Component {
 	}
 	
 	_accessDetailNote = (DataNote) => {
-		console.log(JSON.parse(DataNote).Glicemie)
+
 		this.props.navigation.navigate('DetailNote', {data: JSON.parse(DataNote)})
 	}
 
 	render() {
+		APIGetPatientNotesByModule(this.props.token, this.props.idCurrentModule).then(data => {
+			if (data.status == 200) {
+				let response = data.json()
+				if (response.modules.length > 0 && JSON.stringify(this.state.DNotes) != JSON.stringify(response.modules)) {
+					this.setState({
+						DNotes: [ ...response.notes ],
+					})
+				}
+			}
+		})
 		return (
 			<View style={styles.main_container}>
 				<FlatList
@@ -36,7 +47,7 @@ class Calendar extends React.Component {
 					<TouchableOpacity
 						style={styles.note}
 						onPress={() => this._accessDetailNote(item.data)}>
-							<Text>{item.id}</Text>
+							<Text style={styles.moduleText}>{JSON.parse(item.data).date} {JSON.parse(item.data).heure}</Text>
 					</TouchableOpacity>
 					//<NoteItem/>
 					)}
@@ -57,11 +68,14 @@ const styles = StyleSheet.create({
 		borderWidth: 3,
 		borderColor: 'black',
 		backgroundColor: '#62BE87',
-		borderRadius: 0.5,
+		borderRadius: 10,
 		padding: 30,
 		color: '#000',
 		marginBottom: 30
 	},
+	moduleText: {
+		fontSize: 20
+	}
 })
 
 const mapStateToProps = (state) => {

@@ -8,17 +8,17 @@ class ModuleItem extends React.Component {
 			<TouchableOpacity
 				style={{
 					flex: 1,
-					margin: 5,
 					alignItems: 'center',
 					justifyContent: 'center',
 					borderWidth: 3,
-					borderColor: dModule.color,
+					borderColor: 'black',
+					borderRadius: 10,
 					backgroundColor : dModule.color,
-					borderRadius: 0.5,
-					padding: 30
+					padding: 30,
+					marginBottom: 30,
 				}}
 				onPress={() => _addModule(dModule.id)}>
-					<Text>{dModule.name}</Text>
+					<Text style={{ fontSize: 20 }}>{dModule.name}</Text>
 			</TouchableOpacity>
 		)
 	}

@@ -114,7 +114,7 @@ class SignIn extends React.Component {
 	<Text>{"\n"}</Text>
 	<Button 
 		color="#62BE87"
-		onPress={() => navigate('SignIn')} 
+		onPress={() => navigate('Login')} 
 		title="J'ai deja un compte"
 		/*title="Je ne déjà inscrit => ALLEZ SUR SIGNIN"*/
 	/>

@@ -1,7 +1,7 @@
 // Components/ModulePlace.js
 
 import React from 'react'
-import { StyleSheet, FlatList} from 'react-native'
+import { StyleSheet, FlatList, View} from 'react-native'
 import ModuleItem from './ModuleItem'
 import NoteItem from './NoteItem'
 import { APIGetModules, APIAddModule } from '../API/APIModule'
@@ -38,6 +38,7 @@ class ModulePlace extends React.Component {
 
 	render() {
 		return(
+			<View style={styles.main_container}>
 			<FlatList
 				style={styles.list}
 				data={this.state.Dmodules}
@@ -49,6 +50,7 @@ class ModulePlace extends React.Component {
 				  />
 				)}
 			/>
+			</View>
 		)
 	}
 }
@@ -56,6 +58,8 @@ class ModulePlace extends React.Component {
 const styles = StyleSheet.create({
 	main_container: {
 		flex: 1,
+		margin: 10,
+		justifyContent: 'center',
 	},
 	search: { 
 		flex: 1,

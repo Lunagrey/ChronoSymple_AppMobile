@@ -16,7 +16,7 @@ class Login extends React.Component {
 
 	constructor(props) {
 		super(props)
-		this.state = { mail: "", password: "", isInvalid: false }
+		this.state = { mail: "", password: "fzer", isInvalid: false }
 	}
 
 	checkLogin = () => {
@@ -80,7 +80,7 @@ class Login extends React.Component {
 				placeholder="Mot de passe"
 				style={{ height: 40, width: deviceWidth / 3 * 2, borderBottomWidth: 1}}
 				onChangeText={(text) => this.setPassword(text)}
-				value={this.mail}
+				value={this.password}
 			/>
 			<Text>{"\n"}</Text>
 			<Button 

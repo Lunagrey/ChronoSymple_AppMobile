@@ -28,11 +28,11 @@ class Note extends React.Component {
 		let myTab = {
 			"Glycemie": this.state.glycemie,
 			"Glucide": this.state.glucide,
-			"Insuline av.repas": this.state.insulineavrepas,
-			"Insuline ap.repas": this.state.Insulineaprepas,
-			"Insuline a jeun": this.state.insulineajeun,
+			"InsulineAvRepas": this.state.insulineavrepas,
+			"InsulineApRepas": this.state.Insulineaprepas,
+			"InsulineAJeun": this.state.insulineajeun,
 			"date": date,
-			"heure": horair
+			"heure": horaire
 		}
 		APIAddPatientNotes(this.props.token, myTab, this.props.idCurrentModule).then(data => {})
 	}
@@ -63,7 +63,7 @@ class Note extends React.Component {
       	<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
 	        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Declaration de symptome{'\n\n\n'}</Text>
 	        <View style={{flexDirection: 'row', marginLeft: deviceWidth / 7, marginRight: deviceWidth / 7}}>
-	        	<Text style={{flex: 1}}> Glicemie:</Text>
+	        	<Text style={{flex: 1}}> Glycemie:</Text>
 	        	<TextInput
 				placeholder="Glycémie"
 				style={{ flex: 1, height: 25, width: deviceWidth / 3, borderBottomWidth: 1}}

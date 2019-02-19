@@ -74,7 +74,7 @@ class DrawerScreen extends Component {
 							keyExtractor={(item) => item.id.toString()}
         						renderItem={({ item }) => (
 							<TouchableOpacity style={{flex: 1, justifyContent : 'center', alignItems: 'center', flexDirection : 'row', backgroundColor: item.color,
-							borderColor: 'black', borderRadius: 0.5, margin: 5, padding: 20, borderWidth: 3}}
+							borderColor: 'black', borderRadius: 10, margin: 5, padding: 20, borderWidth: 3}}
 							onPress={this.navigateToScreen('HomeModule', {idModule: item.id})}>
 								<Text style={{fontSize: 20}}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</Text>
 							</TouchableOpacity>
