@@ -61,6 +61,14 @@ const DoctorChoiceStackNavigator = createStackNavigator({
 	headerMode: 'none'
 })
 
+const ChooseModulesToSendStackNavigator = createStackNavigator({
+	ChooseModulesToSend: {
+		screen: ChooseModulesToSend,
+	}
+}, {
+	headerMode: 'none'
+})
+
 const Tabs = createBottomTabNavigator({
 	Home: {
 		screen : HomeModule,
@@ -165,6 +173,9 @@ const StackNavigtorWhithoutModule = createStackNavigator({
 	},
 	DoctorChoiceStackNavigator: {
 		screen: DoctorChoiceStackNavigator
+	},
+	ChooseModulesToSendStackNavigator: {
+		screen: ChooseModulesToSendStackNavigator
 	}
 })
 

@@ -18,7 +18,6 @@ import { TouchableRipple } from 'react-native-paper';
 import { APIGetDoctors } from '../API/APIModule';
 import { connect } from 'react-redux';
 
-
 class DoctorChoice extends React.Component {
 	constructor (props) {
 		super(props)
@@ -32,17 +31,9 @@ class DoctorChoice extends React.Component {
 	componentWillMount () {
 		APIGetDoctors(this.props.token).then(async data => {
 			let response = await data.json()
-			console.log("toto 12456789");
-			console.log(data)
-			console.log("-----")
 			console.log(response.users)
-			console.log("-----")
-			for (var i = response.users.length - 1; i >= 0; i--) {
-				console.log(i)
-				console.log(response.users[i].id)
-			}
 			this.setState({
-				data: [...response.users],
+				data: response.users,
 			})
 		})
 	}
@@ -51,23 +42,24 @@ class DoctorChoice extends React.Component {
 	render() {
 		let { navigate } = this.props.navigation;
 		let deviceWidth = Dimensions.get('window').width
+		const { data } = this.state;
 		return (
 			<View>
 				<FlatList
-  					data={this.state.data}
+  					data={data}
   					keyExtractor={(item) => item.id.toString()}
   					renderItem={({item, separators}) => (
     					<TouchableHighlight
-      						onPress={() => {}}
+    						key={item.id}
+      						onPress={() => navigate('ChooseModulesToSendStackNavigator')}
       						onShowUnderlay={separators.highlight}
       						onHideUnderlay={separators.unhighlight}>
-      						<View style={{backgroundColor: 'white', borderBottomWidth: 1, justifyContent: 'center'}}>
+      						<View key={item.id} style={{backgroundColor: 'white', borderBottomWidth: 1, justifyContent: 'center'}}>
         						<Text style={{margin: 15}}>{item.first_name} {item.last_name}</Text>
       						</View>
     					</TouchableHighlight>
   					)}
 				/>
-				{this.state.data}
       		</View>
 		)
 	}
