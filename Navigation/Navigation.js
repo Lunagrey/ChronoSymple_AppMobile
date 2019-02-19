@@ -11,8 +11,9 @@ import DrawerScreen from './DrawerScreen';
 import ModulePlace from '../Components/ModulePlace';
 import HomeModule from '../Components/HomeModule';
 import Calendar from '../Components/Calendar';
-import CalendarNote from '../Components/CalendarNote';
+/*import CalendarNote from '../Components/CalendarNote';*/
 import DoctorChoice from '../Components/DoctorChoice';
+import ChooseModulesToSend from '../Components/ChooseModulesToSend';
 
 import DetailNote from '../Components/DetailNote';
 import Statistic from '../Components/Statistic';
@@ -58,6 +59,14 @@ const ExportStackNavigator = createStackNavigator({
 const DoctorChoiceStackNavigator = createStackNavigator({
 	DoctorChoice: {
 		screen: DoctorChoice,
+	}
+}, {
+	headerMode: 'none'
+})
+
+const ChooseModulesToSendStackNavigator = createStackNavigator({
+	ChooseModulesToSend: {
+		screen: ChooseModulesToSend,
 	}
 }, {
 	headerMode: 'none'
@@ -164,9 +173,12 @@ const StackNavigtorWhithoutModule = createStackNavigator({
 	},
 	CalendarStackNavigator: {
 		screen : CalendarStackNavigator
-	}
+	},
 	DoctorChoiceStackNavigator: {
 		screen: DoctorChoiceStackNavigator
+	},
+	ChooseModulesToSendStackNavigator: {
+		screen: ChooseModulesToSendStackNavigator
 	}
 })
 

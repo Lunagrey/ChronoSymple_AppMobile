@@ -15,10 +15,11 @@ import { View,
 	Image} from 'react-native'
 import { Icon } from 'react-native-elements'
 import { TouchableRipple } from 'react-native-paper';
-import { APIGetDoctors } from '../API/APIModule';
+import { APIGetPatientModules } from '../API/APIModule';
 import { connect } from 'react-redux';
 
-class DoctorChoice extends React.Component {
+
+class ChooseModulesToSend extends React.Component {
 	constructor (props) {
 		super(props)
 
@@ -29,11 +30,16 @@ class DoctorChoice extends React.Component {
 	}
 
 	componentWillMount () {
-		APIGetDoctors(this.props.token).then(async data => {
+		APIGetPatientModules(this.props.token).then(async data => {
+			console.log("ChooseModulesToSend=>");
+			console.log(data)
 			let response = await data.json()
-			console.log(response.users)
+			console.log("-----")
+			console.log(response.modules)
+			console.log("-----")
+			
 			this.setState({
-				data: response.users,
+				data: response.modules,
 			})
 		})
 	}
@@ -42,32 +48,27 @@ class DoctorChoice extends React.Component {
 	render() {
 		let { navigate } = this.props.navigation;
 		let deviceWidth = Dimensions.get('window').width
-		const { data } = this.state;
+		var moduleLists = [];
+
+		for (let i = 0; i < this.state.data; i++) {
+			moduleLists.push(
+				<View key = {i}>
+					<Text>{this.state.data[i].name}</Text>
+				</View>
+			)
+		}
 		return (
-			<View>
-				<FlatList
-  					data={data}
-  					keyExtractor={(item) => item.id.toString()}
-  					renderItem={({item, separators}) => (
-    					<TouchableHighlight
-    						key={item.id}
-      						onPress={() => navigate('ChooseModulesToSendStackNavigator')}
-      						onShowUnderlay={separators.highlight}
-      						onHideUnderlay={separators.unhighlight}>
-      						<View key={item.id} style={{backgroundColor: 'white', borderBottomWidth: 1, justifyContent: 'center'}}>
-        						<Text style={{margin: 15}}>{item.first_name} {item.last_name}</Text>
-      						</View>
-    					</TouchableHighlight>
-  					)}
-				/>
-      		</View>
+			<View style={styles.main_container}>
+				{moduleLists}
+			</View>
 		)
 	}
 }
 
 const styles = StyleSheet.create({
 	main_container: {
-		flex: 1
+		margin: 10,
+		justifyContent: 'center'
 	},
 	search: { 
 		flex: 1,
@@ -83,6 +84,9 @@ const styles = StyleSheet.create({
 	},
 	searchelem: {
 		flex: 1
+	},
+	moduleText: {
+		fontSize: 20
 	}
 })
 
@@ -92,4 +96,4 @@ const mapStateToProps = (state) => {
 	}
       }
       
-export default connect(mapStateToProps)(DoctorChoice)
+export default connect(mapStateToProps)(ChooseModulesToSend)
