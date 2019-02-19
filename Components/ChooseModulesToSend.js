@@ -49,11 +49,26 @@ class ChooseModulesToSend extends React.Component {
 		let { navigate } = this.props.navigation;
 		let deviceWidth = Dimensions.get('window').width
 		var moduleLists = [];
-
-		for (let i = 0; i < this.state.data; i++) {
+		const dataToRender = this.state.data
+		const numRows = dataToRender.length
+		for (let i = 0; i < numRows; i++) {
 			moduleLists.push(
 				<View key = {i}>
-					<Text>{this.state.data[i].name}</Text>
+					<TouchableOpacity
+						style={{
+							flex: 1,
+							margin: 5,
+							alignItems: 'center',
+							justifyContent: 'center',
+							borderWidth: 3,
+							borderColor: this.state.data[i].color,
+							backgroundColor : this.state.data[i].color,
+							borderRadius: 0.5,
+							padding: 30
+						}}
+						onPress={() => navigate('Export')}>
+						<Text>{this.state.data[i].name}</Text>
+					</TouchableOpacity>
 				</View>
 			)
 		}
@@ -78,12 +93,14 @@ const styles = StyleSheet.create({
 		borderWidth: 0.5,
 		paddingLeft: 5
 	},
-	module: { 
-		flex: 9,
-		height: 50
-	},
-	searchelem: {
-		flex: 1
+	module: {
+		flex: 1,
+		margin: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderWidth: 3,
+		borderRadius: 0.5,
+		padding: 30
 	},
 	moduleText: {
 		fontSize: 20
