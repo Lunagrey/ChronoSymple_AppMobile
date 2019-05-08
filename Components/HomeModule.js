@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableHighlight, Button } from 'react-native'
 import { connect } from 'react-redux'
 
 class HomeModule extends React.Component {

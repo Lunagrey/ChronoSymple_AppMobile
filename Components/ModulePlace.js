@@ -1,7 +1,7 @@
 // Components/ModulePlace.js
 
 import React from 'react'
-import { StyleSheet, FlatList, View} from 'react-native'
+import { StyleSheet, FlatList, View, Button} from 'react-native'
 import ModuleItem from './ModuleItem'
 import NoteItem from './NoteItem'
 import { APIGetModules, APIAddModule } from '../API/APIModule'
@@ -37,8 +37,15 @@ class ModulePlace extends React.Component {
 	}
 
 	render() {
+		let { navigate } = this.props.navigation;
 		return(
 			<View style={styles.main_container}>
+			<Button 
+				color="#62BE87"
+				style={{ height: 40, borderWidth: 2, borderColor: '#000000' }} 
+				onPress={() => navigate('HomeModule')} 
+				title="Diabete"
+			/>
 			<FlatList
 				style={styles.list}
 				data={this.state.Dmodules}
@@ -47,6 +54,7 @@ class ModulePlace extends React.Component {
 				  <ModuleItem
 				    dModule={item}
 				    _addModule={this._addModule}
+
 				  />
 				)}
 			/>
