@@ -8,26 +8,27 @@ import { LoginAPatientWithApi } from '../API/APIConnection'
 class Loading extends React.Component {
 	async componentDidMount() {
 		let { navigate } = this.props.navigation;
-		token = await getToken();
-		await APIGetPatientModules(token).then(async data => {
-			if (data.status == 200) {
-				let response = await data.json()
-				setToken(token);
-				const action = { type: "TOGGLE_FAVORITE", value: token }
-				this.props.dispatch(action)
-				console.log(response)
-				if (response.modules.length > 0 && token !== null) {
-					const action = { type: "CURRENT_MODULE", value: response.modules[0].id}
-					this.props.dispatch(action)
-					this.props.navigation.navigate('HomeModule', {idModule: response.modules[0].id})
-				}
-				else
-					navigate('Home')
-			}
-			else {
-				navigate('LoginStack')
-			}
-		})
+		// token = await getToken();
+		// await APIGetPatientModules(token).then(async data => {
+		// 	if (data.status == 200) {
+		// 		let response = await data.json()
+		// 		setToken(token);
+		// 		const action = { type: "TOGGLE_FAVORITE", value: token }
+		// 		this.props.dispatch(action)
+		// 		console.log(response)
+		// 		if (response.modules.length > 0 && token !== null) {
+		// 			const action = { type: "CURRENT_MODULE", value: response.modules[0].id}
+		// 			this.props.dispatch(action)
+		// 			this.props.navigation.navigate('HomeModule', {idModule: response.modules[0].id})
+		// 		}
+		// 		else
+		// 			navigate('Home')
+		// 	}
+		// 	else {
+		// 		navigate('LoginStack')
+		// 	}
+		// }) TO DECOMMENT NEXT EIP REU
+		navigate('LoginStack') // TO RM NEXT EIP REU
 	}
 
 	render() {
