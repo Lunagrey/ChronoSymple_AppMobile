@@ -29,13 +29,13 @@ class DoctorChoice extends React.Component {
 	}
 
 	componentWillMount () {
-		APIGetDoctors(this.props.token).then(async data => {
+		/*APIGetDoctors(this.props.token).then(async data => {
 			let response = await data.json()
 			console.log(response.users)
 			this.setState({
 				data: response.users,
 			})
-		})
+		})*/
 	}
 
 

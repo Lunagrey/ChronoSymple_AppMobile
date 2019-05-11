@@ -13,12 +13,12 @@ class Calendar extends React.Component {
 		this.state = {
 			DNotes: []
 		}
-		APIGetPatientNotesByModule(this.props.token, this.props.idCurrentModule).then(data => {
+		/*APIGetPatientNotesByModule(this.props.token, this.props.idCurrentModule).then(data => {
 			console.log(data)
 			this.setState({
 				DNotes: [ ...data.notes ]
 			})
-		})
+		})*/
 	}
 	
 	_accessDetailNote = (DataNote) => {
@@ -27,7 +27,7 @@ class Calendar extends React.Component {
 	}
 
 	render() {
-		APIGetPatientNotesByModule(this.props.token, this.props.idCurrentModule).then(data => {
+		/*APIGetPatientNotesByModule(this.props.token, this.props.idCurrentModule).then(data => {
 			if (data.status == 200) {
 				let response = data.json()
 				if (response.modules.length > 0 && JSON.stringify(this.state.DNotes) != JSON.stringify(response.modules)) {
@@ -36,7 +36,7 @@ class Calendar extends React.Component {
 					})
 				}
 			}
-		})
+		})*/
 		return (
 			<View style={styles.main_container}>
 				<FlatList
