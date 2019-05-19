@@ -12,16 +12,17 @@ class Logout extends React.Component {
 	}
 		
 	componentDidMount() {
-		LogOutAPatientWithApi(this.props.token).then(async data => {
-			if (data.status == 200) {
-				await removeToken()
-				this.props.navigation.navigate('LoginStack');
-			}
-			else {
-				this.props.navigation.goBack();
-			}
-		})
-		.catch()
+		// LogOutAPatientWithApi(this.props.token).then(async data => {
+		// 	if (data.status == 200) {
+		// 		await removeToken()
+		// 		this.props.navigation.navigate('LoginStack');
+		// 	}
+		// 	else {
+		// 		this.props.navigation.goBack();
+		// 	}
+		// })
+		// .catch() // TO DECOMMENT NEXT EIP REU
+		this.props.navigation.navigate('LoginStack'); // TO RM NEXT EIP REU
 	}
 
 	render() {
