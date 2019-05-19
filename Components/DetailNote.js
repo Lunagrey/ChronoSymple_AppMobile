@@ -10,11 +10,15 @@ class ModulePlace extends React.Component {
 		let item = this.props.navigation.getParam('data')
 		return (
 			<View style={styles.main_container}>
-				<Text>Glycemie : {item.Glycemie}</Text>
-				<Text>Glucide : {item.Glucide}</Text>
-				<Text>Insuline a jeun : {item.InsulineAvRepas}</Text>
-				<Text>Insuline avant repas : {item.InsulineApRepas}</Text>
-				<Text>Insuline après repas : {item.InsulineAJeun}</Text>
+				<Text style={styles.moduleText}>Glycemie : {item.Glycemie}</Text>
+				<Text>{"\n"}</Text>
+				<Text style={styles.moduleText}>Glucide : {item.Glucide}</Text>
+				<Text>{"\n"}</Text>
+				<Text style={styles.moduleText}>Insuline a jeun : {item.InsulineAvRepas}</Text>
+				<Text>{"\n"}</Text>
+				<Text style={styles.moduleText}>Insuline avant repas : {item.InsulineApRepas}</Text>
+				<Text>{"\n"}</Text>			
+				<Text style={styles.moduleText}>Insuline après repas : {item.InsulineAJeun}</Text>
 			</View>
 		)
 	}
@@ -26,6 +30,9 @@ const styles = StyleSheet.create({
 		justifyContent: "center", 
 		alignItems: "center"
 	},
+	moduleText: {
+		fontSize: 20
+	}
 })
 
 export default ModulePlace;

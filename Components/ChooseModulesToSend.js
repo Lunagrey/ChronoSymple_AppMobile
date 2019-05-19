@@ -67,7 +67,7 @@ class ChooseModulesToSend extends React.Component {
 							marginBottom: 30,
 						}}
 						onPress={() => navigate('Export')}>
-						<Text>{this.state.data[i].name}</Text>
+						<Text style={{fontSize: 20}} >{this.state.data[i].name}</Text>
 					</TouchableOpacity>
 				</View>
 			)

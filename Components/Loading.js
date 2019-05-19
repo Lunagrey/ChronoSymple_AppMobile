@@ -21,12 +21,15 @@ class Loading extends React.Component {
 					this.props.dispatch(action)
 					this.props.navigation.navigate('HomeModule', {idModule: response.modules[0].id})
 				}
-				else
+				else {
 					navigate('Home')
+					return "ok";
+				}
 			}
 			else {
 				navigate('LoginStack')
 			}
+			return "ko";
 		})
 	}
 
